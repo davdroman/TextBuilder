@@ -12,11 +12,14 @@ let package = Package(
     products: [
         .library(name: "TextBuilder", targets: ["TextBuilder"]),
     ],
+    dependencies: [
+        .package(name: "SnapshotTesting", url: "https://github.com/pointfreeco/swift-snapshot-testing.git", from: "1.8.2"), // dev
+    ],
     targets: [
         .target(name: "TextBuilder"),
         .testTarget(
             name: "TextBuilderTests",
-            dependencies: ["TextBuilder"]
+            dependencies: ["TextBuilder", "SnapshotTesting"]
         ),
     ]
 )
