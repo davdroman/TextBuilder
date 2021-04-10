@@ -1,0 +1,12 @@
+---
+steps:
+  - hide_dev_dependencies
+  - git_add
+  - commit:
+      message: "Release version $VERSION [skip ci]"
+  - tag
+  - unhide_dev_dependencies
+  - git_add
+  - commit:
+      message: "Unhide dev dependencies"
+  - push
