@@ -107,4 +107,4 @@ var loremIpsum: Text {
 
 TextBuilder supports [Arena](https://github.com/finestructure/Arena) to effortlessly test this library in a playground before you decide to take it for a spin in your own project.
 
-Simply [install Arena](https://github.com/finestructure/Arena#how-to-install-arena) and run `arena davdroman/TextBuilder --platform macos` in your terminal.
+Simply [install Arena](https://github.com/finestructure/Arena#how-to-install-arena) and run `arena davdroman/TextBuilder@branch:master --platform macos` in your terminal.
