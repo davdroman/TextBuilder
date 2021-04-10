@@ -18,10 +18,6 @@ let package = Package(
     ],
     targets: [
         .target(name: "TextBuilder"),
-        .testTarget(
-            name: "TextBuilderTests",
-            dependencies: ["TextBuilder", "SnapshotTesting"],
-            resources: [ .copy("__Snapshots__") ]
-        ),
+        .testTarget(name: "TextBuilderTests", dependencies: ["TextBuilder", "SnapshotTesting"], resources: [ .copy("__Snapshots__") ]), // dev
     ]
 )
