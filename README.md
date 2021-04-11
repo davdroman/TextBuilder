@@ -54,7 +54,7 @@ var loremIpsum: Text {
 
 ![](Tests/TextBuilderTests/__Snapshots__/TextBuilderTests/testMultilineTextBuilder.iOS.png)
 
-### Pro-tip
+### Pro Tip
 
 TextBuilder accepts `String` types directly as if they were plain `Text`, and also provides a `String.text` computed var to remove unwanted code noise when `Text` is explicitly needed.
 
@@ -77,10 +77,10 @@ First, you can use `Text.init(separator:content:)`:
 ```swift
 var loremIpsum: Text {
     Text(separator: " 🍆 ") {
-        Text("Lorem").underline().foregroundColor(.blue)
-        Text("ipsum dolor")
-        Text("sit").bold()
-        Text("amet, consectetur")
+        "Lorem".text.underline().foregroundColor(.blue)
+        "ipsum dolor"
+        "sit".text.bold()
+        "amet, consectetur"
     }
 }
 ```
@@ -94,10 +94,10 @@ struct EggplantSeparator: TextBuilderSeparator {
 
 @TextBuilder<EggplantSeparator>
 var loremIpsum: Text {
-    Text("Lorem").underline().foregroundColor(.blue)
-    Text("ipsum dolor")
-    Text("sit").bold()
-    Text("amet, consectetur")
+    "Lorem".text.underline().foregroundColor(.blue)
+    "ipsum dolor"
+    "sit".text.bold()
+    "amet, consectetur"
 }
 ```
 
