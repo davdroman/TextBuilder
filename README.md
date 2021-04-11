@@ -54,6 +54,20 @@ var loremIpsum: Text {
 
 ![](Tests/TextBuilderTests/__Snapshots__/TextBuilderTests/testMultilineTextBuilder.iOS.png)
 
+### Pro-tip
+
+TextBuilder accepts `String` types directly as if they were plain `Text`, and also provides a `String.text` computed var to remove unwanted code noise when `Text` is explicitly needed.
+
+```swift
+@MultilineTextBuilder
+var loremIpsum: Text {
+    "Lorem".text.underline().foregroundColor(.blue)
+    "ipsum dolor"
+    "sit".text.bold()
+    "amet, consectetur"
+}
+```
+
 ### Other Separators
 
 There are two options to customize the separator used to compose your `Text`.
@@ -88,20 +102,6 @@ var loremIpsum: Text {
 ```
 
 ![](Tests/TextBuilderTests/__Snapshots__/TextBuilderTests/testCustomTextBuilder.iOS.png)
-
-### Pro-tip
-
-TextBuilder accepts `String` types directly as if they were plain `Text`, and also provides a `String.text` computed var to remove unwanted code noise when `Text` is explicitly needed.
-
-```swift
-@MultilineTextBuilder
-var loremIpsum: Text {
-    "Lorem".text.underline().foregroundColor(.blue)
-    "ipsum dolor"
-    "sit".text.bold()
-    "amet, consectetur"
-}
-```
 
 ## Try it out!
 
