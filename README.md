@@ -54,7 +54,7 @@ var loremIpsum: Text {
 
 ![](Tests/TextBuilderTests/__Snapshots__/TextBuilderTests/testMultilineTextBuilder.iOS.png)
 
-### Pro Tip
+### Pro Tip ✨
 
 TextBuilder accepts `String` types directly as if they were plain `Text`, and also provides a `String.text` computed var to remove unwanted code noise when `Text` is explicitly needed.
 
@@ -105,6 +105,6 @@ var loremIpsum: Text {
 
 ## Try it out!
 
-TextBuilder supports [Arena](https://github.com/finestructure/Arena) to effortlessly test this library in a playground before you decide to take it for a spin in your own project.
+TextBuilder supports [Arena](https://github.com/finestructure/Arena) to effortlessly take it for a spin in a playground before you decide to add it to your codebase.
 
 Simply [install Arena](https://github.com/finestructure/Arena#how-to-install-arena) and run `arena davdroman/TextBuilder@branch:master --platform macos` in your terminal.
