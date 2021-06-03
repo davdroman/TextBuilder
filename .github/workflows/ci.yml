@@ -11,7 +11,7 @@ on:
 jobs:
   CI:
     if: false # off until this is resolved https://github.com/actions/virtual-environments/issues/2486
-    runs-on: macos-11.0
+    runs-on: macos-11
     strategy:
       fail-fast: false
       matrix:
