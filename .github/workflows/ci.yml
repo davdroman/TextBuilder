@@ -45,8 +45,8 @@ jobs:
 
     - name: ${{ matrix.platform }} ${{ matrix.action }}
       run: |
-        NSUnbufferedIO=YES \
+        set -o pipefail && \
         xcodebuild clean ${{ matrix.action }} \
           -destination ${{ matrix.destination }} \
           -scheme TextBuilder \
-          2>&1 | xcbeautify
+          | xcbeautify
