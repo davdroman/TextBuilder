@@ -10,23 +10,12 @@ func assertTextSnapshot(_ text: Text, file: StaticString = #file, testName: Stri
         .fixedSize()
         .background(Color.white)
 
-    #if os(macOS) && arch(arm64)
+    #if os(macOS)
     let nsView = NSHostingView(rootView: view)
     assertSnapshot(
         matching: nsView,
-        as: .image(size: nsView.fittingSize),
-        named: "macOS-arm64",
-        record: isRecording,
-        file: file,
-        testName: testName,
-        line: line
-    )
-    #elseif os(macOS) && arch(x86_64)
-    let nsView = NSHostingView(rootView: view)
-    assertSnapshot(
-        matching: nsView,
-        as: .image(size: nsView.fittingSize),
-        named: "macOS-x86_64",
+        as: .dump,
+        named: "macOS",
         record: isRecording,
         file: file,
         testName: testName,
