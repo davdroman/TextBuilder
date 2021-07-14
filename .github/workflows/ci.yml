@@ -8,10 +8,13 @@ on:
     branches:
       - master
 
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   CI:
-    if: false # off until this is resolved https://github.com/actions/virtual-environments/issues/2486
-    runs-on: macos-11.0
+    runs-on: macos-11
     strategy:
       fail-fast: false
       matrix:
@@ -20,7 +23,7 @@ jobs:
         include:
           - platform: iOS
             action: test
-            destination: "'platform=iOS Simulator,name=iPhone 8,OS=14.4'"
+            destination: "'platform=iOS Simulator,name=iPhone 8,OS=14.5'"
 
           - platform: iOS
             action: archive
@@ -34,11 +37,6 @@ jobs:
             action: archive
             destination: "'platform=macOS,arch=x86_64'"
     steps:
-    - name: Cancel Previous Runs
-      uses: styfle/cancel-workflow-action@0.5.0
-      with:
-        access_token: ${{ github.token }}
-
     - name: Git Checkout
       uses: actions/checkout@v2
 
@@ -47,8 +45,8 @@ jobs:
 
     - name: ${{ matrix.platform }} ${{ matrix.action }}
       run: |
-        NSUnbufferedIO=YES \
+        set -o pipefail && \
         xcodebuild clean ${{ matrix.action }} \
           -destination ${{ matrix.destination }} \
           -scheme TextBuilder \
-          2>&1 | xcbeautify
+          | xcbeautify

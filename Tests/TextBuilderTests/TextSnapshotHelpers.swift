@@ -11,10 +11,12 @@ func assertTextSnapshot(_ text: Text, file: StaticString = #file, testName: Stri
         .background(Color.white)
 
     #if os(macOS)
+    // TODO: `image` snapshot tests on macOS
+    // https://github.com/pointfreeco/swift-snapshot-testing/pull/477
     let nsView = NSHostingView(rootView: view)
     assertSnapshot(
         matching: nsView,
-        as: .image(size: nsView.fittingSize),
+        as: .dump,
         named: "macOS",
         record: isRecording,
         file: file,
