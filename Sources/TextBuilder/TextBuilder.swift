@@ -1,5 +1,24 @@
 import SwiftUI
 
+/// A custom attribute that constructs combined text views.
+///
+/// You can use ``TextBuilder`` as an attribute for text-producing properties
+/// or function parameters, allowing them to provide combined text views. For example,
+/// the following `loremIpsum` property will create a single styled text view with each
+/// text separated using eggplant emoji.
+///
+///     struct EggplantSeparator: TextBuilderSeparator {
+///         static var separator: String { " 🍆 " }
+///     }
+///
+///     @TextBuilder<EggplantSeparator>
+///     var loremIpsum: Text {
+///         Text("Lorem").underline().foregroundColor(.blue)
+///         Text("ipsum dolor")
+///         Text("sit").bold()
+///         Text("amet, consectetur")
+///     }
+///
 @resultBuilder
 public struct TextBuilder<Separator: TextBuilderSeparator> {
     public static func buildArray(_ texts: [[Text]]) -> [Text] {
