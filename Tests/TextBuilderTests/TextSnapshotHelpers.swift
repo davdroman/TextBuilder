@@ -23,11 +23,16 @@ func assertTextSnapshot(_ text: Text, file: StaticString = #file, testName: Stri
         testName: testName,
         line: line
     )
-    #elseif os(iOS)
+    #else
+    #if os(iOS)
+    let os = "iOS"
+    #elseif os(tvOS)
+    let os = "tvOS"
+    #endif
     assertSnapshot(
         matching: view,
         as: .image,
-        named: "iOS",
+        named: os,
         record: isRecording,
         file: file,
         testName: testName,
