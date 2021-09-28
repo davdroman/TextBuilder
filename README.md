@@ -110,3 +110,5 @@ var loremIpsum: Text {
 TextBuilder supports [Arena](https://github.com/finestructure/Arena) to effortlessly take it for a spin in a playground before you decide to add it to your codebase.
 
 Simply [install Arena](https://github.com/finestructure/Arena#how-to-install-arena) and run `arena davdroman/TextBuilder@branch:main --platform macos` in your terminal.
+
+Alternatively, a standalone demo Xcode Playground is also provided in this package.
