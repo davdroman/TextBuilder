@@ -6,47 +6,41 @@ on:
       - main
   pull_request:
     branches:
-      - main
+      - "**"
+  schedule:
+    - cron: '3 3 * * 2'  # 3:03 AM, every Tuesday
 
 concurrency:
   group: ${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  CI:
+  macOS:
+    name: ${{ matrix.platform }}
     runs-on: macos-11
     strategy:
       fail-fast: false
       matrix:
-        platform: [iOS, macOS]
-        action: [test, archive]
+        platform:
+          - iOS
+          - macOS
+          - tvOS
         include:
           - platform: iOS
-            action: test
-            destination: "'platform=iOS Simulator,name=iPhone 8,OS=14.5'"
-
-          - platform: iOS
-            action: archive
-            destination: "'generic/platform=iOS'"
-
+            destination: "'platform=iOS Simulator,name=iPhone 8,OS=15.0'"
           - platform: macOS
-            action: test
             destination: "'platform=macOS,arch=x86_64'"
-
-          - platform: macOS
-            action: archive
-            destination: "'platform=macOS,arch=x86_64'"
+          - platform: tvOS
+            destination: "'platform=tvOS Simulator,name=Apple TV,OS=15.0'"
     steps:
-    - name: Git Checkout
-      uses: actions/checkout@v2
-
-    - name: Install Dependencies
-      run: brew install xcbeautify
-
-    - name: ${{ matrix.platform }} ${{ matrix.action }}
+    - uses: actions/checkout@v2
+    - uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+    - name: Run Tests
       run: |
         set -o pipefail && \
-        xcodebuild clean ${{ matrix.action }} \
+        xcodebuild clean test \
           -destination ${{ matrix.destination }} \
           -scheme TextBuilder \
-          | xcbeautify
+          | xcpretty
