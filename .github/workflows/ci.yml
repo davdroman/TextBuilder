@@ -27,11 +27,11 @@ jobs:
           - tvOS
         include:
           - platform: iOS
-            destination: "'platform=iOS Simulator,name=iPhone 8,OS=15.0'"
+            destination: "'platform=iOS Simulator,name=iPhone 8,OS=15.2'"
           - platform: macOS
             destination: "'platform=macOS,arch=x86_64'"
           - platform: tvOS
-            destination: "'platform=tvOS Simulator,name=Apple TV,OS=15.0'"
+            destination: "'platform=tvOS Simulator,name=Apple TV,OS=15.2'"
     steps:
     - uses: actions/checkout@v2
     - uses: maxim-lobanov/setup-xcode@v1
