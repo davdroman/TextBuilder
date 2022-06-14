@@ -56,8 +56,4 @@ public struct TextBuilder<Separator: TextBuilderSeparator> {
     public static func buildFinalResult(_ texts: [Text]) -> Text {
         texts.joined(separator: Text(Separator.separator))
     }
-
-    public static func buildFinalResult(_ texts: [Text]) -> [Text] {
-        texts
-    }
 }
