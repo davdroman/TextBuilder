@@ -1,7 +1,7 @@
-import XCTest
+import SnapshotTesting
 import SwiftUI
 import TextBuilder
-import SnapshotTesting
+import XCTest
 
 final class TextBuilderTests: XCTestCase {
     func testBasicTextBuilder() {
