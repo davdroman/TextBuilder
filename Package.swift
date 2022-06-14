@@ -18,20 +18,14 @@ let package = Package(
         .target(name: "TextBuilder", dependencies: [
             .product(name: "Builders", package: "swift-builders"),
         ]),
-        .testTarget(
-            name: "TextBuilderTests",
-            dependencies: [
-                .target(name: "TextBuilder"),
-                .product(name: "SnapshotTesting", package: "SnapshotTesting"),
-            ],
-            resources: [
-                .copy("__Snapshots__"),
-            ]
-        ),
+        .testTarget(name: "TextBuilderTests", dependencies: [
+            .product(name: "CustomDump", package: "swift-custom-dump"),
+            .target(name: "TextBuilder"),
+        ]),
     ]
 )
 
 package.dependencies = [
-    .package(name: "SnapshotTesting", url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.8.2"),
     .package(name: "swift-builders", url: "https://github.com/davdroman/swift-builders", from: "0.1.0"),
+    .package(name: "swift-custom-dump", url: "https://github.com/pointfreeco/swift-custom-dump", from: "0.5.0"),
 ]
