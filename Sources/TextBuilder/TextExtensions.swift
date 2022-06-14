@@ -5,7 +5,6 @@ extension StringProtocol {
 }
 
 extension Sequence where Element == Text {
-
     /// Returns a new `Text` by concatenating the elements of the sequence,
     ///
     /// The following example shows how an array of `Text` views can be joined to a
@@ -31,7 +30,6 @@ extension Sequence where Element == Text {
 }
 
 extension Text {
-
     /// Creates a  combined text view based on the given `content` by inserting
     /// `separator` text views between each received text component.
     ///
