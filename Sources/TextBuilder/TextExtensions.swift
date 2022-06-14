@@ -1,3 +1,4 @@
+import Builders
 import SwiftUI
 
 extension StringProtocol {
@@ -5,7 +6,6 @@ extension StringProtocol {
 }
 
 extension Sequence where Element == Text {
-
     /// Returns a new `Text` by concatenating the elements of the sequence,
     ///
     /// The following example shows how an array of `Text` views can be joined to a
@@ -30,16 +30,17 @@ extension Sequence where Element == Text {
     }
 }
 
-extension Text {
+public typealias TextArrayBuilder = ArrayBuilder<Text>
 
+extension Text {
     /// Creates a  combined text view based on the given `content` by inserting
     /// `separator` text views between each received text component.
     ///
     /// - Parameters:
     ///   - separator: The text to use as a separator between received text components.
     ///     By default there is no separator.
-    ///   - content: A text builder that creates text components.
-    public init(separator: Text = Text(""), @BasicTextBuilder content: () -> [Text]) {
+    ///   - content: A text array builder that creates text components.
+    public init(separator: Text = Text(""), @TextArrayBuilder content: () -> [Text]) {
         self = content().joined(separator: separator)
     }
 
@@ -48,8 +49,8 @@ extension Text {
     ///
     /// - Parameters:
     ///   - separator: The string to use as a separator between received text components.
-    ///   - content: A text builder that creates text components.
-    public init<Separator: StringProtocol>(separator: Separator, @BasicTextBuilder content: () -> [Text]) {
+    ///   - content: A text array builder that creates text components.
+    public init<Separator: StringProtocol>(separator: Separator, @TextArrayBuilder content: () -> [Text]) {
         self.init(separator: Text(separator), content: content)
     }
 }

@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "swift-builders",
+        "repositoryURL": "https://github.com/davdroman/swift-builders",
+        "state": {
+          "branch": null,
+          "revision": "08d96a63dd74b8efb87987b177bfe762accf279e",
+          "version": "0.1.0"
+        }
+      },
+      {
         "package": "SnapshotTesting",
         "repositoryURL": "https://github.com/pointfreeco/swift-snapshot-testing",
         "state": {

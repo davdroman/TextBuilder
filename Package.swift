@@ -15,7 +15,9 @@ let package = Package(
         .library(name: "TextBuilder", targets: ["TextBuilder"]),
     ],
     targets: [
-        .target(name: "TextBuilder"),
+        .target(name: "TextBuilder", dependencies: [
+            .product(name: "Builders", package: "swift-builders"),
+        ]),
         .testTarget(
             name: "TextBuilderTests",
             dependencies: [
@@ -31,4 +33,5 @@ let package = Package(
 
 package.dependencies = [
     .package(name: "SnapshotTesting", url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.8.2"),
+    .package(name: "swift-builders", url: "https://github.com/davdroman/swift-builders", from: "0.1.0"),
 ]

@@ -1,5 +1,3 @@
-import Foundation
-
 public protocol TextBuilderSeparator {
     associatedtype Separator: StringProtocol
     static var separator: Separator { get }

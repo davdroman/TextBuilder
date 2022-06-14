@@ -24,31 +24,31 @@ final class TextExtensionsTests: XCTestCase {
 
     func testInit_noSeparator() {
         assertTextSnapshot(
-            Text(content: basicTextBuilderText)
+            Text(content: textArrayBuilderText)
         )
         assertTextSnapshot(
-            Text(separator: Text(""), content: basicTextBuilderText)
+            Text(separator: Text(""), content: textArrayBuilderText)
         )
         assertTextSnapshot(
-            Text(separator: "", content: basicTextBuilderText)
+            Text(separator: "", content: textArrayBuilderText)
         )
     }
 
     func testInit_spaceSeparator() {
         assertTextSnapshot(
-            Text(separator: Text(" "), content: basicTextBuilderText)
+            Text(separator: Text(" "), content: textArrayBuilderText)
         )
         assertTextSnapshot(
-            Text(separator: " ", content: basicTextBuilderText)
+            Text(separator: " ", content: textArrayBuilderText)
         )
     }
 
     func testInit_newlineSeparator() {
         assertTextSnapshot(
-            Text(separator: Text("\n"), content: basicTextBuilderText)
+            Text(separator: Text("\n"), content: textArrayBuilderText)
         )
         assertTextSnapshot(
-            Text(separator: "\n", content: basicTextBuilderText)
+            Text(separator: "\n", content: textArrayBuilderText)
         )
     }
 }
@@ -63,8 +63,8 @@ private extension TextExtensionsTests {
         ]
     }
 
-    @BasicTextBuilder
-    func basicTextBuilderText() -> [Text] {
+    @TextArrayBuilder
+    func textArrayBuilderText() -> [Text] {
         Text("Lorem").underline().foregroundColor(.blue)
         Text("ipsum dolor")
         Text("sit").bold()
