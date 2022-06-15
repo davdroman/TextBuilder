@@ -3,7 +3,7 @@ import BuildersTestSupport
 import SwiftUI
 import TextBuilder
 
-benchmark("Result builder") {
+benchmark("@TextBuilder") {
     @SpacedTextBuilder
     func complexTextBuilderText() -> Text {
         "Lorem".text.underline().foregroundColor(.blue)

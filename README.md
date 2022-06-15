@@ -116,6 +116,6 @@ $ swift run -c release Benchmarks
 
 name                          time        std        iterations
 ---------------------------------------------------------------
-Result builder                3875.000 ns ±   4.60 %     357920
-Text.init(separator:content:) 3709.000 ns ±   2.99 %     375336
+@TextBuilder                  3875.000 ns ±   5.94 %     359621
+Text.init(separator:content:) 3750.000 ns ±   5.64 %     373819
 ```
