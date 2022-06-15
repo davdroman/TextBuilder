@@ -37,7 +37,7 @@ public struct TextBuilder<Separator: TextBuilderSeparator> {
         texts
     }
 
-    public static func buildExpression(_ string: String) -> [Text] {
+    public static func buildExpression<S: StringProtocol>(_ string: S) -> [Text] {
         [Text(string)]
     }
 
