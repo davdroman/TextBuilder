@@ -33,6 +33,12 @@ extension Sequence where Element == Text {
 
 public typealias TextArrayBuilder = ArrayBuilder<Text>
 
+extension TextArrayBuilder {
+    public static func buildExpression<S: StringProtocol>(_ expression: S) -> [Text] {
+        [Text(expression)]
+    }
+}
+
 extension Text {
     /// Creates a  combined text view based on the given `content` by inserting
     /// `separator` text views between each received text component.
