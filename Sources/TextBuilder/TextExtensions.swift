@@ -2,7 +2,10 @@ import Builders
 import SwiftUI
 
 extension StringProtocol {
-    public var text: Text { Text(self) }
+    @inlinable
+    public var text: Text {
+        Text(self)
+    }
 }
 
 extension Text {
