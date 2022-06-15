@@ -5,6 +5,20 @@ extension StringProtocol {
     public var text: Text { Text(self) }
 }
 
+extension Text {
+    static var none: Text {
+        Text(_EmptyTextMarker())
+    }
+
+    var isNone: Bool {
+        self == .none
+    }
+
+    var isEmpty: Bool {
+        self == Text(verbatim: "") || self == Text("")
+    }
+}
+
 extension Sequence where Element == Text {
     /// Returns a new `Text` by concatenating the elements of the sequence,
     ///
@@ -19,13 +33,13 @@ extension Sequence where Element == Text {
     ///   in this sequence. By default there is no separator.
     /// - Returns: A single, concatenated `Text` view.
     public func joined(separator: Text = Text(verbatim: "")) -> Text {
-        reduce(Text(_EmptyTextMarker())) { result, text in
-            if result == Text(_EmptyTextMarker()) {
-                return text
-            } else if separator == Text(verbatim: "") || separator == Text("") {
-                return result + text
+        reduce(Text.none) { accumulated, next in
+            if accumulated.isNone {
+                return next
+            } else if separator.isEmpty {
+                return accumulated + next
             } else {
-                return result + separator + text
+                return accumulated + separator + next
             }
         }
     }
