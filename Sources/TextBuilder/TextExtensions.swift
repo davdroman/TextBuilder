@@ -19,13 +19,14 @@ extension Sequence where Element == Text {
     ///   in this sequence. By default there is no separator.
     /// - Returns: A single, concatenated `Text` view.
     public func joined(separator: Text = Text("")) -> Text {
-        var isInitial = true
-        return reduce(Text("")) { (result, text) in
-            if isInitial {
-                isInitial = false
+        reduce(Text(_EmptyTextMarker())) { result, text in
+            if result == Text(_EmptyTextMarker()) {
                 return text
+            } else if separator == Text(verbatim: "") || separator == Text("") {
+                return result + text
+            } else {
+                return result + separator + text
             }
-            return result + separator + text
         }
     }
 }
