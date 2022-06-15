@@ -104,11 +104,3 @@ var loremIpsum: Text {
 ```
 
 ![](https://github.com/davdroman/TextBuilder/blob/bd991543b123eebf60417b8567f68064655a9151/Tests/TextBuilderTests/__Snapshots__/TextBuilderTests/testCustomTextBuilder.iOS.png?raw=true)
-
-## Try it out!
-
-TextBuilder supports [Arena](https://github.com/finestructure/Arena) to effortlessly take it for a spin in a playground before you decide to add it to your codebase.
-
-Simply [install Arena](https://github.com/finestructure/Arena#how-to-install-arena) and run `arena davdroman/TextBuilder@branch:main --platform macos` in your terminal.
-
-Alternatively, a standalone demo Xcode Playground is also provided in this package.
