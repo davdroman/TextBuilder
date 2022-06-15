@@ -104,3 +104,18 @@ var loremIpsum: Text {
 ```
 
 ![](https://github.com/davdroman/TextBuilder/blob/bd991543b123eebf60417b8567f68064655a9151/Tests/TextBuilderTests/__Snapshots__/TextBuilderTests/testCustomTextBuilder.iOS.png?raw=true)
+
+## Benchmarks
+
+```
+MacBook Pro (14-inch, 2021)
+Apple M1 Pro (10 cores, 8 performance and 2 efficiency)
+32 GB Memory
+
+$ swift run -c release Benchmarks
+
+name                          time        std        iterations
+---------------------------------------------------------------
+Result builder                3875.000 ns ±   4.60 %     357920
+Text.init(separator:content:) 3709.000 ns ±   2.99 %     375336
+```

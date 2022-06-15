@@ -22,10 +22,16 @@ let package = Package(
             .product(name: "CustomDump", package: "swift-custom-dump"),
             .target(name: "TextBuilder"),
         ]),
+
+        .executableTarget(name: "Benchmarks", dependencies: [
+            .product(name: "Benchmark", package: "Benchmark"),
+            .target(name: "TextBuilder"),
+        ]),
     ]
 )
 
 package.dependencies = [
+    .package(name: "Benchmark", url: "https://github.com/google/swift-benchmark", from: "0.1.2"),
     .package(name: "swift-builders", url: "https://github.com/davdroman/swift-builders", from: "0.1.0"),
     .package(name: "swift-custom-dump", url: "https://github.com/pointfreeco/swift-custom-dump", from: "0.5.0"),
 ]
