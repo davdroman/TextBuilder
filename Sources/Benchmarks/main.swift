@@ -1,10 +1,7 @@
 import Benchmark
+import BuildersTestSupport
 import SwiftUI
 import TextBuilder
-
-// Used to avoid triggering compiler warnings due to
-// obviously inaccessible codepaths.
-var `false`: Bool { false }
 
 benchmark("Result builder") {
     @SpacedTextBuilder

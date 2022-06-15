@@ -1,3 +1,4 @@
+import BuildersTestSupport
 import CustomDump
 import SwiftUI
 import TextBuilder
@@ -126,8 +127,4 @@ private extension TextBuilderTests {
             String(i)
         }
     }
-
-    // Used to avoid triggering compiler warnings due to
-    // obviously inaccessible codepaths.
-    var `false`: Bool { false }
 }
