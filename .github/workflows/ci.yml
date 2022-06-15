@@ -50,4 +50,4 @@ jobs:
       with:
         platform: ${{ matrix.platform }}
         swift: ~${{ matrix.swift }}
-        warnings-as-errors: true
+        scheme: TextBuilder

@@ -2,12 +2,30 @@
   "object": {
     "pins": [
       {
+        "package": "swift-argument-parser",
+        "repositoryURL": "https://github.com/apple/swift-argument-parser",
+        "state": {
+          "branch": null,
+          "revision": "f3c9084a71ef4376f2fabbdf1d3d90a49f1fabdb",
+          "version": "1.1.2"
+        }
+      },
+      {
+        "package": "Benchmark",
+        "repositoryURL": "https://github.com/google/swift-benchmark",
+        "state": {
+          "branch": null,
+          "revision": "8163295f6fe82356b0bcf8e1ab991645de17d096",
+          "version": "0.1.2"
+        }
+      },
+      {
         "package": "swift-builders",
         "repositoryURL": "https://github.com/davdroman/swift-builders",
         "state": {
           "branch": null,
-          "revision": "08d96a63dd74b8efb87987b177bfe762accf279e",
-          "version": "0.1.0"
+          "revision": "967729b6be0cc98496ce70e462932e8dc11e34e6",
+          "version": "0.2.0"
         }
       },
       {
