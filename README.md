@@ -26,7 +26,7 @@ var loremIpsum: Text {
 }
 ```
 
-![](Tests/TextBuilderTests/__Snapshots__/TextBuilderTests/testBasicTextBuilder.iOS.png)
+![](https://github.com/davdroman/TextBuilder/blob/bd991543b123eebf60417b8567f68064655a9151/Tests/TextBuilderTests/__Snapshots__/TextBuilderTests/testBasicTextBuilder.iOS.png?raw=true)
 
 ### Spaced Text
 
@@ -40,7 +40,7 @@ var loremIpsum: Text {
 }
 ```
 
-![](Tests/TextBuilderTests/__Snapshots__/TextBuilderTests/testSpacedTextBuilder.iOS.png)
+![](https://github.com/davdroman/TextBuilder/blob/bd991543b123eebf60417b8567f68064655a9151/Tests/TextBuilderTests/__Snapshots__/TextBuilderTests/testSpacedTextBuilder.iOS.png?raw=true)
 
 ### Multiline Text
 
@@ -54,7 +54,7 @@ var loremIpsum: Text {
 }
 ```
 
-![](Tests/TextBuilderTests/__Snapshots__/TextBuilderTests/testMultilineTextBuilder.iOS.png)
+![](https://github.com/davdroman/TextBuilder/blob/bd991543b123eebf60417b8567f68064655a9151/Tests/TextBuilderTests/__Snapshots__/TextBuilderTests/testMultilineTextBuilder.iOS.png?raw=true)
 
 ### Pro Tip ✨
 
@@ -103,7 +103,7 @@ var loremIpsum: Text {
 }
 ```
 
-![](Tests/TextBuilderTests/__Snapshots__/TextBuilderTests/testCustomTextBuilder.iOS.png)
+![](https://github.com/davdroman/TextBuilder/blob/bd991543b123eebf60417b8567f68064655a9151/Tests/TextBuilderTests/__Snapshots__/TextBuilderTests/testCustomTextBuilder.iOS.png?raw=true)
 
 ## Try it out!
 
