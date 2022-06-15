@@ -1,27 +1,73 @@
-import XCTest
+import CustomDump
 import SwiftUI
 import TextBuilder
-import SnapshotTesting
+import XCTest
 
 final class TextBuilderTests: XCTestCase {
     func testBasicTextBuilder() {
-        assertTextSnapshot(basicTextBuilderText())
+        XCTAssertNoDifference(
+            basicTextBuilderText(),
+            Text("Lorem").underline().foregroundColor(.blue) +
+            Text("ipsum dolor") +
+            Text("sit").bold() +
+            Text("amet, consectetur")
+        )
     }
 
     func testSpacedTextBuilder() {
-        assertTextSnapshot(spacedTextBuilderText())
+        XCTAssertNoDifference(
+            spacedTextBuilderText(),
+            Text("Lorem").underline().foregroundColor(.blue) +
+            Text(verbatim: " ") +
+            Text("ipsum dolor") +
+            Text(verbatim: " ") +
+            Text("sit").bold() +
+            Text(verbatim: " ") +
+            Text("amet, consectetur")
+        )
     }
 
     func testMultilineTextBuilder() {
-        assertTextSnapshot(multilineTextBuilderText())
+        XCTAssertNoDifference(
+            multilineTextBuilderText(),
+            Text("Lorem").underline().foregroundColor(.blue) +
+            Text(verbatim: "\n") +
+            Text("ipsum dolor") +
+            Text(verbatim: "\n") +
+            Text("sit").bold() +
+            Text(verbatim: "\n") +
+            Text("amet, consectetur")
+        )
     }
 
     func testCustomTextBuilder() {
-        assertTextSnapshot(customTextBuilderText())
+        XCTAssertNoDifference(
+            customTextBuilderText(),
+            Text("Lorem").underline().foregroundColor(.blue) +
+            Text(verbatim: " 🍆 ") +
+            Text("ipsum dolor") +
+            Text(verbatim: " 🍆 ") +
+            Text("sit").bold() +
+            Text(verbatim: " 🍆 ") +
+            Text("amet, consectetur")
+        )
     }
 
     func testComplexTextBuilder() {
-        assertTextSnapshot(complexTextBuilderText())
+        XCTAssertNoDifference(
+            complexTextBuilderText(),
+            Text(verbatim: "Lorem").underline().foregroundColor(.blue) +
+            Text(verbatim: " ") +
+            Text(verbatim: "sit").bold() +
+            Text(verbatim: " ") +
+            Text(verbatim: "amet, consectetur") +
+            Text(verbatim: " ") +
+            Text(verbatim: "1") +
+            Text(verbatim: " ") +
+            Text(verbatim: "2") +
+            Text(verbatim: " ") +
+            Text(verbatim: "3")
+        )
     }
 }
 

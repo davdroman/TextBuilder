@@ -18,14 +18,15 @@ extension Sequence where Element == Text {
     /// - Parameter separator: A `Text` view to insert between each of the elements
     ///   in this sequence. By default there is no separator.
     /// - Returns: A single, concatenated `Text` view.
-    public func joined(separator: Text = Text("")) -> Text {
-        var isInitial = true
-        return reduce(Text("")) { (result, text) in
-            if isInitial {
-                isInitial = false
+    public func joined(separator: Text = Text(verbatim: "")) -> Text {
+        reduce(Text(_EmptyTextMarker())) { result, text in
+            if result == Text(_EmptyTextMarker()) {
                 return text
+            } else if separator == Text(verbatim: "") || separator == Text("") {
+                return result + text
+            } else {
+                return result + separator + text
             }
-            return result + separator + text
         }
     }
 }
@@ -40,7 +41,7 @@ extension Text {
     ///   - separator: The text to use as a separator between received text components.
     ///     By default there is no separator.
     ///   - content: A text array builder that creates text components.
-    public init(separator: Text = Text(""), @TextArrayBuilder content: () -> [Text]) {
+    public init(separator: Text = Text(verbatim: ""), @TextArrayBuilder content: () -> [Text]) {
         self = content().joined(separator: separator)
     }
 
