@@ -19,6 +19,52 @@ import SwiftUI
 ///         Text("amet, consectetur")
 ///     }
 ///
+#if compiler(>=5.7)
+@resultBuilder
+public struct TextBuilder<Separator: TextBuilderSeparator> {
+    public static func buildPartialBlock(first: Text) -> Text {
+        first
+    }
+
+    public static func buildPartialBlock(accumulated: Text, next: Text) -> Text {
+        if next.isNone {
+            return accumulated
+        } else if Separator.separator.isEmpty {
+            return accumulated + next
+        } else {
+            return accumulated + Text(Separator.separator) + next
+        }
+    }
+
+    public static func buildArray(_ components: [Text]) -> Text {
+        components.joined(separator: Text(Separator.separator))
+    }
+
+    public static func buildEither(first component: Text) -> Text {
+        component
+    }
+
+    public static func buildEither(second component: Text) -> Text {
+        component
+    }
+
+    public static func buildExpression(_ string: some StringProtocol) -> Text {
+        Text(string)
+    }
+
+    public static func buildExpression(_ component: Text) -> Text {
+        component
+    }
+
+    public static func buildLimitedAvailability(_ component: Text) -> Text {
+        component
+    }
+
+    public static func buildOptional(_ component: Text?) -> Text {
+        component ?? Text.none
+    }
+}
+#else
 @resultBuilder
 public struct TextBuilder<Separator: TextBuilderSeparator> {
     public static func buildArray(_ texts: [[Text]]) -> [Text] {
@@ -57,3 +103,4 @@ public struct TextBuilder<Separator: TextBuilderSeparator> {
         texts.joined(separator: Text(Separator.separator))
     }
 }
+#endif
