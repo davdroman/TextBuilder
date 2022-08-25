@@ -1,4 +1,4 @@
-// swift-tools-version:5.4
+// swift-tools-version:5.6
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -25,7 +25,7 @@ let package = Package(
         ]),
 
         .executableTarget(name: "Benchmarks", dependencies: [
-            .product(name: "Benchmark", package: "Benchmark"),
+            .product(name: "Benchmark", package: "swift-benchmark"),
             .product(name: "BuildersTestSupport", package: "swift-builders"),
             .target(name: "TextBuilder"),
         ]),
@@ -33,7 +33,7 @@ let package = Package(
 )
 
 package.dependencies = [
-    .package(name: "Benchmark", url: "https://github.com/google/swift-benchmark", from: "0.1.2"),
-    .package(name: "swift-builders", url: "https://github.com/davdroman/swift-builders", from: "0.2.0"),
-    .package(name: "swift-custom-dump", url: "https://github.com/pointfreeco/swift-custom-dump", from: "0.5.0"),
+    .package(url: "https://github.com/google/swift-benchmark", from: "0.1.2"),
+    .package(url: "https://github.com/davdroman/swift-builders", from: "0.2.0"),
+    .package(url: "https://github.com/pointfreeco/swift-custom-dump", from: "0.5.0"),
 ]
