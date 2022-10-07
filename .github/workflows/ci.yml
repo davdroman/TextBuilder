@@ -33,11 +33,6 @@ jobs:
           - 5.7
     steps:
     - uses: actions/checkout@v2
-    - name: Install additional SDKs
-      if: ${{ matrix.swift == 5.7 && (matrix.platform == 'tvOS' || matrix.platform == 'watchOS') }}
-      run: xcodebuild -downloadAllPlatforms
-      env:
-        DEVELOPER_DIR: /Applications/Xcode_14.0.app/Contents/Developer
     - uses: mxcl/xcodebuild@v1
       with:
         platform: ${{ matrix.platform }}
