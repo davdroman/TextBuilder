@@ -21,7 +21,7 @@ import SwiftUI
 ///
 #if compiler(>=5.7)
 @resultBuilder
-public struct TextBuilder<Separator: TextBuilderSeparator> {
+public struct TextBuilderWith<Separator: TextBuilderSeparator> {
     @inlinable
     public static func buildPartialBlock(first: Text?) -> Text? {
         first
@@ -82,7 +82,7 @@ public struct TextBuilder<Separator: TextBuilderSeparator> {
 }
 #else
 @resultBuilder
-public struct TextBuilder<Separator: TextBuilderSeparator> {
+public struct TextBuilderWith<Separator: TextBuilderSeparator> {
     public static func buildArray(_ texts: [[Text]]) -> [Text] {
         texts.flatMap { $0 }
     }
