@@ -4,7 +4,7 @@ import SwiftUI
 import TextBuilder
 
 benchmark("@TextBuilder") {
-    @SpacedTextBuilder
+    @TextBuilderWithSpaces
     func complexTextBuilderText() -> Text {
         "Lorem".text.underline().foregroundColor(.blue)
         if `false` {

@@ -49,17 +49,33 @@ final class TextExtensionsTests: XCTestCase {
             Text("amet, consectetur")
         )
         XCTAssertNoDifference(
-            Text(separator: Text(""), content: textArrayBuilderText),
+            Text(separator: nil, content: textArrayBuilderText),
             Text("Lorem").underline().foregroundColor(.blue) +
             Text("ipsum dolor") +
             Text("sit").bold() +
             Text("amet, consectetur")
         )
+    }
+
+    func testInit_blankSeparator() {
+        XCTAssertNoDifference(
+            Text(separator: Text(""), content: textArrayBuilderText),
+            Text("Lorem").underline().foregroundColor(.blue) +
+            Text("") +
+            Text("ipsum dolor") +
+            Text("") +
+            Text("sit").bold() +
+            Text("") +
+            Text("amet, consectetur")
+        )
         XCTAssertNoDifference(
             Text(separator: "", content: textArrayBuilderText),
             Text("Lorem").underline().foregroundColor(.blue) +
+            Text(verbatim: "") +
             Text("ipsum dolor") +
+            Text(verbatim: "") +
             Text("sit").bold() +
+            Text(verbatim: "") +
             Text("amet, consectetur")
         )
     }

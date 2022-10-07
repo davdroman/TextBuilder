@@ -8,7 +8,7 @@ import SwiftUI
 /// text separated using eggplant emoji.
 ///
 ///     struct EggplantSeparator: TextBuilderSeparator {
-///         static var separator: String { " 🍆 " }
+///         static var separator: String? { " 🍆 " }
 ///     }
 ///
 ///     @TextBuilder<EggplantSeparator>
@@ -21,52 +21,68 @@ import SwiftUI
 ///
 #if compiler(>=5.7)
 @resultBuilder
-public struct TextBuilder<Separator: TextBuilderSeparator> {
-    public static func buildPartialBlock(first: Text) -> Text {
+public struct TextBuilderWith<Separator: TextBuilderSeparator> {
+    @inlinable
+    public static func buildPartialBlock(first: Text?) -> Text? {
         first
     }
 
-    public static func buildPartialBlock(accumulated: Text, next: Text) -> Text {
-        if next.isNone {
+    @inlinable
+    public static func buildPartialBlock(accumulated: Text?, next: Text?) -> Text? {
+        guard let next else {
             return accumulated
-        } else if Separator.separator.isEmpty {
-            return accumulated + next
-        } else {
-            return accumulated + Text(Separator.separator) + next
         }
+        guard let accumulated else {
+            return next
+        }
+        guard let separator = Separator.separator else {
+            return accumulated + next
+        }
+        return accumulated + Text(separator) + next
     }
 
-    public static func buildArray(_ components: [Text]) -> Text {
-        components.joined(separator: Text(Separator.separator))
+    public static func buildArray(_ components: [Text?]) -> Text? {
+        components.lazy.compactMap { $0 }.joined(separator: Separator.separator.map(Text.init))
     }
 
-    public static func buildEither(first component: Text) -> Text {
+    @inlinable
+    public static func buildEither(first component: Text?) -> Text? {
         component
     }
 
-    public static func buildEither(second component: Text) -> Text {
+    @inlinable
+    public static func buildEither(second component: Text?) -> Text? {
         component
     }
 
-    public static func buildExpression(_ string: some StringProtocol) -> Text {
+    @inlinable
+    public static func buildExpression(_ string: some StringProtocol) -> Text? {
         Text(string)
     }
 
-    public static func buildExpression(_ component: Text) -> Text {
+    @inlinable
+    public static func buildExpression(_ component: Text?) -> Text? {
         component
     }
 
-    public static func buildLimitedAvailability(_ component: Text) -> Text {
+    @inlinable
+    public static func buildLimitedAvailability(_ component: Text?) -> Text? {
         component
     }
 
-    public static func buildOptional(_ component: Text?) -> Text {
-        component ?? Text.none
+    @inlinable
+    public static func buildOptional(_ component: Text??) -> Text? {
+        component ?? nil
+    }
+
+    @inlinable
+    public static func buildFinalResult(_ component: Text?) -> Text {
+        component ?? Text(verbatim: "")
     }
 }
 #else
 @resultBuilder
-public struct TextBuilder<Separator: TextBuilderSeparator> {
+public struct TextBuilderWith<Separator: TextBuilderSeparator> {
     public static func buildArray(_ texts: [[Text]]) -> [Text] {
         texts.flatMap { $0 }
     }
@@ -87,8 +103,12 @@ public struct TextBuilder<Separator: TextBuilderSeparator> {
         [Text(string)]
     }
 
-    public static func buildExpression(_ text: Text) -> [Text] {
-        [text]
+    public static func buildExpression(_ text: Text?) -> [Text] {
+        if let text = text {
+            return [text]
+        } else {
+            return []
+        }
     }
 
     public static func buildLimitedAvailability(_ texts: [Text]) -> [Text] {
@@ -100,7 +120,7 @@ public struct TextBuilder<Separator: TextBuilderSeparator> {
     }
 
     public static func buildFinalResult(_ texts: [Text]) -> Text {
-        texts.joined(separator: Text(Separator.separator))
+        texts.joined(separator: Separator.separator.map(Text.init)) ?? Text(verbatim: "")
     }
 }
 #endif

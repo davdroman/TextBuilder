@@ -92,7 +92,7 @@ final class TextBuilderTests: XCTestCase {
 }
 
 private extension TextBuilderTests {
-    @BasicTextBuilder
+    @TextBuilder
     func basicTextBuilderText() -> Text {
         Text("Lorem").underline().foregroundColor(.blue)
         Text("ipsum dolor")
@@ -100,7 +100,7 @@ private extension TextBuilderTests {
         Text("amet, consectetur")
     }
 
-    @SpacedTextBuilder
+    @TextBuilderWithSpaces
     func spacedTextBuilderText() -> Text {
         Text("Lorem").underline().foregroundColor(.blue)
         Text("ipsum dolor")
@@ -108,7 +108,7 @@ private extension TextBuilderTests {
         Text("amet, consectetur")
     }
 
-    @MultilineTextBuilder
+    @TextBuilderWithNewlines
     func multilineTextBuilderText() -> Text {
         Text("Lorem").underline().foregroundColor(.blue)
         Text("ipsum dolor")
@@ -117,10 +117,10 @@ private extension TextBuilderTests {
     }
 
     struct EmojiSeparator: TextBuilderSeparator {
-        static var separator: String { " 🍆 " }
+        static var separator: String? { " 🍆 " }
     }
 
-    @TextBuilder<EmojiSeparator>
+    @TextBuilderWith<EmojiSeparator>
     func customTextBuilderText() -> Text {
         Text("Lorem").underline().foregroundColor(.blue)
         Text("ipsum dolor")
@@ -128,7 +128,7 @@ private extension TextBuilderTests {
         Text("amet, consectetur")
     }
 
-    @SpacedTextBuilder
+    @TextBuilderWithSpaces
     func complexTextBuilderText() -> Text {
         "Lorem".text.underline().foregroundColor(.blue)
         if `false` {
