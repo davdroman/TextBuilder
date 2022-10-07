@@ -3,7 +3,7 @@ import BuildersTestSupport
 import SwiftUI
 import TextBuilder
 
-benchmark("@TextBuilder") {
+benchmark("Result Builder") {
     @TextBuilderWithSpaces
     func complexTextBuilderText() -> Text {
         "Lorem".text.underline().foregroundColor(.blue)
@@ -25,7 +25,7 @@ benchmark("@TextBuilder") {
     _ = complexTextBuilderText()
 }
 
-benchmark("Text.init(separator:content:)") {
+benchmark("Initializer") {
     _ = Text(separator: " ") {
         "Lorem".text.underline().foregroundColor(.blue)
         if `false` {
