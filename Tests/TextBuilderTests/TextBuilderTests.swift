@@ -117,7 +117,7 @@ private extension TextBuilderTests {
     }
 
     struct EmojiSeparator: TextBuilderSeparator {
-        static var separator: String { " 🍆 " }
+        static var separator: String? { " 🍆 " }
     }
 
     @TextBuilder<EmojiSeparator>

@@ -1,18 +1,18 @@
 public protocol TextBuilderSeparator {
     associatedtype Separator: StringProtocol
-    static var separator: Separator { get }
+    static var separator: Separator? { get }
 }
 
 public struct EmptySeparator: TextBuilderSeparator {
-    public static var separator: String { "" }
+    public static var separator: String? { nil }
 }
 
 public struct WhitespaceSeparator: TextBuilderSeparator {
-    public static var separator: String { " " }
+    public static var separator: String? { " " }
 }
 
 public struct NewlineSeparator: TextBuilderSeparator {
-    public static var separator: String { "\n" }
+    public static var separator: String? { "\n" }
 }
 
 public typealias BasicTextBuilder = TextBuilder<EmptySeparator>
