@@ -114,8 +114,8 @@ Apple M1 Pro (10 cores, 8 performance and 2 efficiency)
 
 $ swift run -c release Benchmarks
 
-name                          time        std        iterations
----------------------------------------------------------------
-@TextBuilder                  3875.000 ns ±   5.94 %     359621
-Text.init(separator:content:) 3750.000 ns ±   5.64 %     373819
+name           time        std        iterations
+------------------------------------------------
+Result Builder 1667.000 ns ±  34.69 %     796036
+Initializer    2333.000 ns ±  25.30 %     585724
 ```
