@@ -57,7 +57,7 @@ extension TextArrayBuilder {
 }
 
 extension Text {
-    /// Creates a  combined text view based on the given `content` by inserting
+    /// Creates a combined text view based on the given `content` by inserting
     /// `separator` text views between each received text component.
     ///
     /// - Parameters:
@@ -68,7 +68,7 @@ extension Text {
         self = content().joined(separator: separator)
     }
 
-    /// Creates a  combined text view based on the given `content` by inserting
+    /// Creates a combined text view based on the given `content` by inserting
     /// `separator` string between each received text component.
     ///
     /// - Parameters:
