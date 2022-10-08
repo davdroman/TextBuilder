@@ -14,10 +14,10 @@ TextBuilder leverages the power of Swift [Result Builders](https://github.com/ap
 
 TextBuilder offers 3 ready-made builders out of the box, depending on which text separator you need.
 
-### Unspaced Text
+### Default (unspaced)
 
 ```swift
-@BasicTextBuilder
+@TextBuilder
 var loremIpsum: Text {
     Text("Lorem").underline().foregroundColor(.blue)
     Text("ipsum dolor")
@@ -28,10 +28,10 @@ var loremIpsum: Text {
 
 ![](https://github.com/davdroman/TextBuilder/blob/bd991543b123eebf60417b8567f68064655a9151/Tests/TextBuilderTests/__Snapshots__/TextBuilderTests/testBasicTextBuilder.iOS.png?raw=true)
 
-### Spaced Text
+### With Spaces
 
 ```swift
-@SpacedTextBuilder
+@TextBuilderWithSpaces
 var loremIpsum: Text {
     Text("Lorem").underline().foregroundColor(.blue)
     Text("ipsum dolor")
@@ -42,10 +42,10 @@ var loremIpsum: Text {
 
 ![](https://github.com/davdroman/TextBuilder/blob/bd991543b123eebf60417b8567f68064655a9151/Tests/TextBuilderTests/__Snapshots__/TextBuilderTests/testSpacedTextBuilder.iOS.png?raw=true)
 
-### Multiline Text
+### Multiline
 
 ```swift
-@MultilineTextBuilder
+@TextBuilderWithNewlines
 var loremIpsum: Text {
     Text("Lorem").underline().foregroundColor(.blue)
     Text("ipsum dolor")
@@ -61,7 +61,7 @@ var loremIpsum: Text {
 TextBuilder accepts `String` types directly as if they were plain `Text`, and also provides a `String.text` computed var to remove unwanted code noise when `Text` is explicitly needed.
 
 ```swift
-@MultilineTextBuilder
+@TextBuilderWithNewlines
 var loremIpsum: Text {
     "Lorem".text.underline().foregroundColor(.blue)
     "ipsum dolor"
@@ -91,10 +91,10 @@ But if you prefer to keep using a result builder, you can:
 
 ```swift
 struct EggplantSeparator: TextBuilderSeparator {
-    static var separator: String { " 🍆 " }
+    static var separator: String? { " 🍆 " }
 }
 
-@TextBuilder<EggplantSeparator>
+@TextBuilderWith<EggplantSeparator>
 var loremIpsum: Text {
     "Lorem".text.underline().foregroundColor(.blue)
     "ipsum dolor"
@@ -116,6 +116,6 @@ $ swift run -c release Benchmarks
 
 name           time        std        iterations
 ------------------------------------------------
-Result Builder 1667.000 ns ±  34.69 %     796036
-Initializer    2333.000 ns ±  25.30 %     585724
+Result Builder 1875.000 ns ±  26.15 %     729940
+Initializer    2542.000 ns ±  16.88 %     540826
 ```
