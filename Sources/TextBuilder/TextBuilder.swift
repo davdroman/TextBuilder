@@ -83,26 +83,32 @@ public struct TextBuilderWith<Separator: TextBuilderSeparator> {
 #else
 @resultBuilder
 public struct TextBuilderWith<Separator: TextBuilderSeparator> {
+    @inlinable
     public static func buildArray(_ texts: [[Text]]) -> [Text] {
         texts.flatMap { $0 }
     }
 
+    @inlinable
     public static func buildBlock(_ texts: [Text]...) -> [Text] {
         texts.flatMap { $0 }
     }
 
+    @inlinable
     public static func buildEither(first texts: [Text]) -> [Text] {
         texts
     }
 
+    @inlinable
     public static func buildEither(second texts: [Text]) -> [Text] {
         texts
     }
 
+    @inlinable
     public static func buildExpression<S: StringProtocol>(_ string: S) -> [Text] {
         [Text(string)]
     }
 
+    @inlinable
     public static func buildExpression(_ text: Text?) -> [Text] {
         if let text = text {
             return [text]
@@ -111,10 +117,12 @@ public struct TextBuilderWith<Separator: TextBuilderSeparator> {
         }
     }
 
+    @inlinable
     public static func buildLimitedAvailability(_ texts: [Text]) -> [Text] {
         texts
     }
 
+    @inlinable
     public static func buildOptional(_ texts: [Text]?) -> [Text] {
         texts ?? []
     }
