@@ -61,7 +61,7 @@ public struct TextBuilderWith<Separator: TextBuilderSeparator> {
     }
 
     @inlinable
-    public static func buildExpression(_ component: Text?) -> Text? {
+    public static func buildExpression(_ component: Text) -> Text? {
         component
     }
 
@@ -109,12 +109,8 @@ public struct TextBuilderWith<Separator: TextBuilderSeparator> {
     }
 
     @inlinable
-    public static func buildExpression(_ text: Text?) -> [Text] {
-        if let text = text {
-            return [text]
-        } else {
-            return []
-        }
+    public static func buildExpression(_ text: Text) -> [Text] {
+        [text]
     }
 
     @inlinable
