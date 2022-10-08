@@ -53,9 +53,12 @@ extension Text {
     ///   - separator: The text to use as a separator between received text components.
     ///     By default there is no separator.
     ///   - content: A text array builder that creates text components.
-    public init?(separator: Text? = nil, @TextArrayBuilder content: () -> [Text]) {
-        let text = content().joined(separator: separator)
-        if let text = text { self = text } else { return nil }
+    public init(
+        separator: Text? = nil,
+        default: Text = .empty,
+        @TextArrayBuilder content: () -> [Text]
+    ) {
+        self = content().joined(separator: separator) ?? `default`
     }
 
     /// Creates a combined text view based on the given `content` by inserting
@@ -65,7 +68,11 @@ extension Text {
     ///   - separator: The string to use as a separator between received text components.
     ///   - content: A text array builder that creates text components.
     @inlinable
-    public init?<Separator: StringProtocol>(separator: Separator, @TextArrayBuilder content: () -> [Text]) {
+    public init<Separator: StringProtocol>(
+        separator: Separator,
+        default: Text = .empty,
+        @TextArrayBuilder content: () -> [Text]
+    ) {
         self.init(separator: Text(separator), content: content)
     }
 }
