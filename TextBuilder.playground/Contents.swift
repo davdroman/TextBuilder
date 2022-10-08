@@ -17,7 +17,7 @@ struct DemoView: View {
         .background(Color(.windowBackgroundColor))
     }
 
-    @SpacedTextBuilder
+    @TextBuilderWithSpaces
     var welcomeText: Text {
         if let name = name, !name.isEmpty {
             "Welcome,"
@@ -27,7 +27,7 @@ struct DemoView: View {
         }
     }
 
-    @BasicTextBuilder
+    @TextBuilder
     var descriptionText: Text {
         "This is a demo of "
         "TextBuilder".text.italic()
