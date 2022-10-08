@@ -77,7 +77,7 @@ public struct TextBuilderWith<Separator: TextBuilderSeparator> {
 
     @inlinable
     public static func buildFinalResult(_ component: Text?) -> Text {
-        component ?? Text(verbatim: "")
+        component ?? .empty
     }
 }
 #else
@@ -128,7 +128,7 @@ public struct TextBuilderWith<Separator: TextBuilderSeparator> {
     }
 
     public static func buildFinalResult(_ texts: [Text]) -> Text {
-        texts.joined(separator: Separator.separator.map(Text.init)) ?? Text(verbatim: "")
+        texts.joined(separator: Separator.separator.map(Text.init)) ?? .empty
     }
 }
 #endif

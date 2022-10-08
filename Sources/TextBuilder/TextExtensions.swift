@@ -1,6 +1,13 @@
 import Builders
 import SwiftUI
 
+extension Text {
+    @inlinable
+    public static var empty: Text {
+        Text(verbatim: "")
+    }
+}
+
 extension StringProtocol {
     @inlinable
     public var text: Text {
