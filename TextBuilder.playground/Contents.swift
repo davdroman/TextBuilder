@@ -3,7 +3,7 @@ import TextBuilder
 import PlaygroundSupport
 
 struct DemoView: View {
-    @State var name: String?
+    let name: String?
 
     var body: some View {
         VStack(spacing: 20) {
@@ -53,7 +53,7 @@ struct DemoView: View {
         .font(.system(.caption))
         .foregroundColor(.blue)
         .pointable()
-        .onTapGesture { NSWorkspace.shared.open(URL(string: "https://github.com/davdroman/TextBuilder")!) }
+        .onTapGesture { NSWorkspace.shared.open(URL(string: "https://github.com/davdroman")!) }
     }
 }
 
