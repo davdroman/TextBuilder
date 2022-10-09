@@ -29,6 +29,7 @@ jobs:
           - tvOS
           - watchOS
         swift:
+          - 5.5
           - 5.6
           - 5.7
     steps:
