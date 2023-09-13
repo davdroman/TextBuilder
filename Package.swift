@@ -1,5 +1,4 @@
-// swift-tools-version:5.5
-// The swift-tools-version declares the minimum version of Swift required to build this package.
+// swift-tools-version:5.7
 
 import PackageDescription
 
@@ -7,8 +6,8 @@ let package = Package(
     name: "TextBuilder",
     platforms: [
         .iOS(.v13),
-        .macOS(.v10_15),
         .tvOS(.v13),
+        .macOS(.v10_15),
         .watchOS(.v6),
     ],
     products: [
@@ -34,6 +33,6 @@ let package = Package(
 
 package.dependencies = [
     .package(url: "https://github.com/google/swift-benchmark", from: "0.1.2"),
-    .package(url: "https://github.com/davdroman/swift-builders", from: "0.2.0"),
-    .package(url: "https://github.com/pointfreeco/swift-custom-dump", from: "0.5.0"),
+    .package(url: "https://github.com/davdroman/swift-builders", from: "0.5.0"),
+    .package(url: "https://github.com/pointfreeco/swift-custom-dump", from: "1.0.0"),
 ]
