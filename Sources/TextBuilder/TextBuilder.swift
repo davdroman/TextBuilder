@@ -19,7 +19,6 @@ import SwiftUI
 ///         Text("amet, consectetur")
 ///     }
 ///
-#if compiler(>=5.7)
 @resultBuilder
 public struct TextBuilderWith<Separator: TextBuilderSeparator> {
     @inlinable
@@ -80,51 +79,3 @@ public struct TextBuilderWith<Separator: TextBuilderSeparator> {
         component ?? .empty
     }
 }
-#else
-@resultBuilder
-public struct TextBuilderWith<Separator: TextBuilderSeparator> {
-    @inlinable
-    public static func buildArray(_ texts: [[Text]]) -> [Text] {
-        texts.flatMap { $0 }
-    }
-
-    @inlinable
-    public static func buildBlock(_ texts: [Text]...) -> [Text] {
-        texts.flatMap { $0 }
-    }
-
-    @inlinable
-    public static func buildEither(first texts: [Text]) -> [Text] {
-        texts
-    }
-
-    @inlinable
-    public static func buildEither(second texts: [Text]) -> [Text] {
-        texts
-    }
-
-    @inlinable
-    public static func buildExpression<S: StringProtocol>(_ string: S) -> [Text] {
-        [Text(string)]
-    }
-
-    @inlinable
-    public static func buildExpression(_ text: Text) -> [Text] {
-        [text]
-    }
-
-    @inlinable
-    public static func buildLimitedAvailability(_ texts: [Text]) -> [Text] {
-        texts
-    }
-
-    @inlinable
-    public static func buildOptional(_ texts: [Text]?) -> [Text] {
-        texts ?? []
-    }
-
-    public static func buildFinalResult(_ texts: [Text]) -> Text {
-        texts.joined(separator: Separator.separator.map(Text.init)) ?? .empty
-    }
-}
-#endif
