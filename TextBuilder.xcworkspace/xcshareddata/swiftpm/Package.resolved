@@ -1,52 +1,50 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "swift-argument-parser",
-        "repositoryURL": "https://github.com/apple/swift-argument-parser",
-        "state": {
-          "branch": null,
-          "revision": "fee6933f37fde9a5e12a1e4aeaa93fe60116ff2a",
-          "version": "1.2.2"
-        }
-      },
-      {
-        "package": "Benchmark",
-        "repositoryURL": "https://github.com/google/swift-benchmark",
-        "state": {
-          "branch": null,
-          "revision": "8163295f6fe82356b0bcf8e1ab991645de17d096",
-          "version": "0.1.2"
-        }
-      },
-      {
-        "package": "swift-builders",
-        "repositoryURL": "https://github.com/davdroman/swift-builders",
-        "state": {
-          "branch": null,
-          "revision": "a8fd97e32b7bb65f3fc1bd7d72725155fb2b4d77",
-          "version": "0.4.0"
-        }
-      },
-      {
-        "package": "swift-custom-dump",
-        "repositoryURL": "https://github.com/pointfreeco/swift-custom-dump",
-        "state": {
-          "branch": null,
-          "revision": "de8ba65649e7ee317b9daf27dd5eebf34bd4be57",
-          "version": "0.9.1"
-        }
-      },
-      {
-        "package": "xctest-dynamic-overlay",
-        "repositoryURL": "https://github.com/pointfreeco/xctest-dynamic-overlay",
-        "state": {
-          "branch": null,
-          "revision": "ab8c9f45843694dd16be4297e6d44c0634fd9913",
-          "version": "0.8.4"
-        }
+  "pins" : [
+    {
+      "identity" : "swift-argument-parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-argument-parser",
+      "state" : {
+        "revision" : "fee6933f37fde9a5e12a1e4aeaa93fe60116ff2a",
+        "version" : "1.2.2"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "swift-benchmark",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/swift-benchmark",
+      "state" : {
+        "revision" : "8163295f6fe82356b0bcf8e1ab991645de17d096",
+        "version" : "0.1.2"
+      }
+    },
+    {
+      "identity" : "swift-builders",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/davdroman/swift-builders",
+      "state" : {
+        "revision" : "a283b1ab4f028f13ca2843df340087d3dada5f26",
+        "version" : "0.5.0"
+      }
+    },
+    {
+      "identity" : "swift-custom-dump",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/swift-custom-dump",
+      "state" : {
+        "revision" : "edd66cace818e1b1c6f1b3349bb1d8e00d6f8b01",
+        "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "xctest-dynamic-overlay",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/xctest-dynamic-overlay",
+      "state" : {
+        "revision" : "23cbf2294e350076ea4dbd7d5d047c1e76b03631",
+        "version" : "1.0.2"
+      }
+    }
+  ],
+  "version" : 2
 }
