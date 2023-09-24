@@ -43,7 +43,7 @@ jobs:
           - platform: watchOS
             action: build
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: mxcl/xcodebuild@v2
       with:
         action: ${{ matrix.action }}
