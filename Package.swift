@@ -33,6 +33,6 @@ let package = Package(
 
 package.dependencies = [
     .package(url: "https://github.com/google/swift-benchmark", from: "0.1.2"),
-    .package(url: "https://github.com/davdroman/swift-builders", from: "0.5.0"),
+    .package(url: "https://github.com/davdroman/swift-builders", from: "0.5.1"),
     .package(url: "https://github.com/pointfreeco/swift-custom-dump", from: "1.0.0"),
 ]
