@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/davdroman/swift-builders",
       "state" : {
-        "revision" : "0119400fb6e733219f61c1c95c6dd61ca5965c26",
-        "version" : "0.5.1"
+        "revision" : "72cfbfffd6a56883a3c590a87f88a71c819d6de3",
+        "version" : "0.10.0"
       }
     },
     {

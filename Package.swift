@@ -18,14 +18,12 @@ let package = Package(
             .product(name: "Builders", package: "swift-builders"),
         ]),
         .testTarget(name: "TextBuilderTests", dependencies: [
-            .product(name: "BuildersTestSupport", package: "swift-builders"),
             .product(name: "CustomDump", package: "swift-custom-dump"),
             .target(name: "TextBuilder"),
         ]),
 
         .executableTarget(name: "Benchmarks", dependencies: [
             .product(name: "Benchmark", package: "swift-benchmark"),
-            .product(name: "BuildersTestSupport", package: "swift-builders"),
             .target(name: "TextBuilder"),
         ]),
     ]
@@ -33,6 +31,6 @@ let package = Package(
 
 package.dependencies = [
     .package(url: "https://github.com/google/swift-benchmark", from: "0.1.2"),
-    .package(url: "https://github.com/davdroman/swift-builders", from: "0.5.1"),
+    .package(url: "https://github.com/davdroman/swift-builders", from: "0.10.0"),
     .package(url: "https://github.com/pointfreeco/swift-custom-dump", from: "1.0.0"),
 ]
