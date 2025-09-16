@@ -1,11 +1,12 @@
 import CustomDump
 import SwiftUI
+import Testing
 import TextBuilder
-import XCTest
 
-final class TextBuilderTests: XCTestCase {
-	func testBasicTextBuilder() {
-		XCTAssertNoDifference(
+@Suite
+struct TextBuilderTests {
+	@Test func basicTextBuilder() {
+		expectNoDifference(
 			basicTextBuilderText(),
 			Text("Lorem").underline().foregroundColor(.blue) +
 			Text("ipsum dolor") +
@@ -14,8 +15,8 @@ final class TextBuilderTests: XCTestCase {
 		)
 	}
 
-	func testSpacedTextBuilder() {
-		XCTAssertNoDifference(
+	@Test func spacedTextBuilder() {
+		expectNoDifference(
 			spacedTextBuilderText(),
 			Text("Lorem").underline().foregroundColor(.blue) +
 			Text(verbatim: " ") +
@@ -27,8 +28,8 @@ final class TextBuilderTests: XCTestCase {
 		)
 	}
 
-	func testMultilineTextBuilder() {
-		XCTAssertNoDifference(
+	@Test func multilineTextBuilder() {
+		expectNoDifference(
 			multilineTextBuilderText(),
 			Text("Lorem").underline().foregroundColor(.blue) +
 			Text(verbatim: "\n") +
@@ -40,8 +41,8 @@ final class TextBuilderTests: XCTestCase {
 		)
 	}
 
-	func testCustomTextBuilder() {
-		XCTAssertNoDifference(
+	@Test func customTextBuilder() {
+		expectNoDifference(
 			customTextBuilderText(),
 			Text("Lorem").underline().foregroundColor(.blue) +
 			Text(verbatim: " 🍆 ") +
@@ -53,9 +54,8 @@ final class TextBuilderTests: XCTestCase {
 		)
 	}
 
-	func testComplexTextBuilder() {
-		#if compiler(>=5.7)
-		XCTAssertNoDifference(
+	@Test func complexTextBuilder() {
+		expectNoDifference(
 			complexTextBuilderText(),
 			Text(verbatim: "Lorem").underline().foregroundColor(.blue) +
 			Text(verbatim: " ") +
@@ -71,22 +71,6 @@ final class TextBuilderTests: XCTestCase {
 				Text(verbatim: "3")
 			)
 		)
-		#else
-		XCTAssertNoDifference(
-			complexTextBuilderText(),
-			Text(verbatim: "Lorem").underline().foregroundColor(.blue) +
-			Text(verbatim: " ") +
-			Text(verbatim: "sit").bold() +
-			Text(verbatim: " ") +
-			Text(verbatim: "amet, consectetur") +
-			Text(verbatim: " ") +
-			Text(verbatim: "1") +
-			Text(verbatim: " ") +
-			Text(verbatim: "2") +
-			Text(verbatim: " ") +
-			Text(verbatim: "3")
-		)
-		#endif
 	}
 }
 

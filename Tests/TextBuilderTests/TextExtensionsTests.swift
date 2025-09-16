@@ -1,11 +1,11 @@
 import CustomDump
 import SwiftUI
+import Testing
 import TextBuilder
-import XCTest
 
-final class TextExtensionsTests: XCTestCase {
-	func testJoined_noSeparator() {
-		XCTAssertNoDifference(
+@Suite struct TextExtensionsTests {
+	@Test func joined_noSeparator() {
+		expectNoDifference(
 			textArray.joined(),
 			Text("Lorem").underline().foregroundColor(.blue) +
 			Text("ipsum dolor") +
@@ -14,8 +14,8 @@ final class TextExtensionsTests: XCTestCase {
 		)
 	}
 
-	func testJoined_spaceSeparator() {
-		XCTAssertNoDifference(
+	@Test func joined_spaceSeparator() {
+		expectNoDifference(
 			textArray.joined(separator: Text(" ")),
 			Text("Lorem").underline().foregroundColor(.blue) +
 			Text(" ") +
@@ -27,8 +27,8 @@ final class TextExtensionsTests: XCTestCase {
 		)
 	}
 
-	func testJoined_formattedSeparator() {
-		XCTAssertNoDifference(
+	@Test func joined_formattedSeparator() {
+		expectNoDifference(
 			textArray.joined(separator: Text(" ** ").italic().foregroundColor(.green)),
 			Text("Lorem").underline().foregroundColor(.blue) +
 			Text(" ** ").italic().foregroundColor(.green) +
@@ -40,15 +40,15 @@ final class TextExtensionsTests: XCTestCase {
 		)
 	}
 
-	func testInit_noSeparator() {
-		XCTAssertNoDifference(
+	@Test func init_noSeparator() {
+		expectNoDifference(
 			Text(content: textArrayBuilderText),
 			Text("Lorem").underline().foregroundColor(.blue) +
 			Text("ipsum dolor") +
 			Text("sit").bold() +
 			Text("amet, consectetur")
 		)
-		XCTAssertNoDifference(
+		expectNoDifference(
 			Text(separator: nil, content: textArrayBuilderText),
 			Text("Lorem").underline().foregroundColor(.blue) +
 			Text("ipsum dolor") +
@@ -57,8 +57,8 @@ final class TextExtensionsTests: XCTestCase {
 		)
 	}
 
-	func testInit_blankSeparator() {
-		XCTAssertNoDifference(
+	@Test func init_blankSeparator() {
+		expectNoDifference(
 			Text(separator: Text(""), content: textArrayBuilderText),
 			Text("Lorem").underline().foregroundColor(.blue) +
 			Text("") +
@@ -68,7 +68,7 @@ final class TextExtensionsTests: XCTestCase {
 			Text("") +
 			Text("amet, consectetur")
 		)
-		XCTAssertNoDifference(
+		expectNoDifference(
 			Text(separator: "", content: textArrayBuilderText),
 			Text("Lorem").underline().foregroundColor(.blue) +
 			Text(verbatim: "") +
@@ -80,8 +80,8 @@ final class TextExtensionsTests: XCTestCase {
 		)
 	}
 
-	func testInit_spaceSeparator() {
-		XCTAssertNoDifference(
+	@Test func init_spaceSeparator() {
+		expectNoDifference(
 			Text(separator: Text(" "), content: textArrayBuilderText),
 			Text("Lorem").underline().foregroundColor(.blue) +
 			Text(" ") +
@@ -91,7 +91,7 @@ final class TextExtensionsTests: XCTestCase {
 			Text(" ") +
 			Text("amet, consectetur")
 		)
-		XCTAssertNoDifference(
+		expectNoDifference(
 			Text(separator: " ", content: textArrayBuilderText),
 			Text("Lorem").underline().foregroundColor(.blue) +
 			Text(verbatim: " ") +
@@ -103,8 +103,8 @@ final class TextExtensionsTests: XCTestCase {
 		)
 	}
 
-	func testInit_newlineSeparator() {
-		XCTAssertNoDifference(
+	@Test func init_newlineSeparator() {
+		expectNoDifference(
 			Text(separator: Text("\n"), content: textArrayBuilderText),
 			Text("Lorem").underline().foregroundColor(.blue) +
 			Text("\n") +
@@ -114,7 +114,7 @@ final class TextExtensionsTests: XCTestCase {
 			Text("\n") +
 			Text("amet, consectetur")
 		)
-		XCTAssertNoDifference(
+		expectNoDifference(
 			Text(separator: "\n", content: textArrayBuilderText),
 			Text("Lorem").underline().foregroundColor(.blue) +
 			Text(verbatim: "\n") +
