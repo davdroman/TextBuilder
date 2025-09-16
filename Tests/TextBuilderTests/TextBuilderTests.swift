@@ -5,7 +5,7 @@ import XCTest
 
 final class TextBuilderTests: XCTestCase {
 	func testBasicTextBuilder() {
-		XCTAssertNoDifference(
+		expectNoDifference(
 			basicTextBuilderText(),
 			Text("Lorem").underline().foregroundColor(.blue) +
 			Text("ipsum dolor") +
@@ -15,7 +15,7 @@ final class TextBuilderTests: XCTestCase {
 	}
 
 	func testSpacedTextBuilder() {
-		XCTAssertNoDifference(
+		expectNoDifference(
 			spacedTextBuilderText(),
 			Text("Lorem").underline().foregroundColor(.blue) +
 			Text(verbatim: " ") +
@@ -28,7 +28,7 @@ final class TextBuilderTests: XCTestCase {
 	}
 
 	func testMultilineTextBuilder() {
-		XCTAssertNoDifference(
+		expectNoDifference(
 			multilineTextBuilderText(),
 			Text("Lorem").underline().foregroundColor(.blue) +
 			Text(verbatim: "\n") +
@@ -41,7 +41,7 @@ final class TextBuilderTests: XCTestCase {
 	}
 
 	func testCustomTextBuilder() {
-		XCTAssertNoDifference(
+		expectNoDifference(
 			customTextBuilderText(),
 			Text("Lorem").underline().foregroundColor(.blue) +
 			Text(verbatim: " 🍆 ") +
@@ -54,7 +54,7 @@ final class TextBuilderTests: XCTestCase {
 	}
 
 	func testComplexTextBuilder() {
-		XCTAssertNoDifference(
+		expectNoDifference(
 			complexTextBuilderText(),
 			Text(verbatim: "Lorem").underline().foregroundColor(.blue) +
 			Text(verbatim: " ") +

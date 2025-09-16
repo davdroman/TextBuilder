@@ -41,7 +41,7 @@ public struct TextBuilderWith<Separator: TextBuilderSeparator> {
 	}
 
 	public static func buildArray(_ components: [Text?]) -> Text? {
-		components.lazy.compactMap { $0 }.joined(separator: Separator.separator.map(Text.init))
+		components.lazy.compactMap { $0 }.joined(separator: Separator.separator.map { Text($0) })
 	}
 
 	@inlinable
