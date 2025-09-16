@@ -21,61 +21,61 @@ import SwiftUI
 ///
 @resultBuilder
 public struct TextBuilderWith<Separator: TextBuilderSeparator> {
-    @inlinable
-    public static func buildPartialBlock(first: Text?) -> Text? {
-        first
-    }
+	@inlinable
+	public static func buildPartialBlock(first: Text?) -> Text? {
+		first
+	}
 
-    @inlinable
-    public static func buildPartialBlock(accumulated: Text?, next: Text?) -> Text? {
-        guard let next else {
-            return accumulated
-        }
-        guard let accumulated else {
-            return next
-        }
-        guard let separator = Separator.separator else {
-            return accumulated + next
-        }
-        return accumulated + Text(separator) + next
-    }
+	@inlinable
+	public static func buildPartialBlock(accumulated: Text?, next: Text?) -> Text? {
+		guard let next else {
+			return accumulated
+		}
+		guard let accumulated else {
+			return next
+		}
+		guard let separator = Separator.separator else {
+			return accumulated + next
+		}
+		return accumulated + Text(separator) + next
+	}
 
-    public static func buildArray(_ components: [Text?]) -> Text? {
-        components.lazy.compactMap { $0 }.joined(separator: Separator.separator.map(Text.init))
-    }
+	public static func buildArray(_ components: [Text?]) -> Text? {
+		components.lazy.compactMap { $0 }.joined(separator: Separator.separator.map(Text.init))
+	}
 
-    @inlinable
-    public static func buildEither(first component: Text?) -> Text? {
-        component
-    }
+	@inlinable
+	public static func buildEither(first component: Text?) -> Text? {
+		component
+	}
 
-    @inlinable
-    public static func buildEither(second component: Text?) -> Text? {
-        component
-    }
+	@inlinable
+	public static func buildEither(second component: Text?) -> Text? {
+		component
+	}
 
-    @inlinable
-    public static func buildExpression(_ string: some StringProtocol) -> Text? {
-        Text(string)
-    }
+	@inlinable
+	public static func buildExpression(_ string: some StringProtocol) -> Text? {
+		Text(string)
+	}
 
-    @inlinable
-    public static func buildExpression(_ component: Text) -> Text? {
-        component
-    }
+	@inlinable
+	public static func buildExpression(_ component: Text) -> Text? {
+		component
+	}
 
-    @inlinable
-    public static func buildLimitedAvailability(_ component: Text?) -> Text? {
-        component
-    }
+	@inlinable
+	public static func buildLimitedAvailability(_ component: Text?) -> Text? {
+		component
+	}
 
-    @inlinable
-    public static func buildOptional(_ component: Text??) -> Text? {
-        component ?? nil
-    }
+	@inlinable
+	public static func buildOptional(_ component: Text??) -> Text? {
+		component ?? nil
+	}
 
-    @inlinable
-    public static func buildFinalResult(_ component: Text?) -> Text {
-        component ?? .empty
-    }
+	@inlinable
+	public static func buildFinalResult(_ component: Text?) -> Text {
+		component ?? .empty
+	}
 }
