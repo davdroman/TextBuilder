@@ -1,5 +1,4 @@
 import Benchmark
-import BuildersTestSupport
 import SwiftUI
 import TextBuilder
 
@@ -7,10 +6,10 @@ benchmark("Result Builder") {
 	@TextBuilderWithSpaces
 	func complexTextBuilderText() -> Text {
 		"Lorem".text.underline().foregroundColor(.blue)
-		if `false` {
+		if false {
 			"ipsum dolor"
 		}
-		if `false` {
+		if false {
 			"sit"
 		} else {
 			"sit".text.bold()
@@ -28,10 +27,10 @@ benchmark("Result Builder") {
 benchmark("Initializer") {
 	_ = Text(separator: " ") {
 		"Lorem".text.underline().foregroundColor(.blue)
-		if `false` {
+		if false {
 			"ipsum dolor"
 		}
-		if `false` {
+		if false {
 			"sit"
 		} else {
 			"sit".text.bold()
