@@ -1,10 +1,11 @@
 import CustomDump
 import SwiftUI
+import Testing
 import TextBuilder
-import XCTest
 
-final class TextBuilderTests: XCTestCase {
-	func testBasicTextBuilder() {
+@Suite
+struct TextBuilderTests {
+	@Test func basicTextBuilder() {
 		expectNoDifference(
 			basicTextBuilderText(),
 			Text("Lorem").underline().foregroundColor(.blue) +
@@ -14,7 +15,7 @@ final class TextBuilderTests: XCTestCase {
 		)
 	}
 
-	func testSpacedTextBuilder() {
+	@Test func spacedTextBuilder() {
 		expectNoDifference(
 			spacedTextBuilderText(),
 			Text("Lorem").underline().foregroundColor(.blue) +
@@ -27,7 +28,7 @@ final class TextBuilderTests: XCTestCase {
 		)
 	}
 
-	func testMultilineTextBuilder() {
+	@Test func multilineTextBuilder() {
 		expectNoDifference(
 			multilineTextBuilderText(),
 			Text("Lorem").underline().foregroundColor(.blue) +
@@ -40,7 +41,7 @@ final class TextBuilderTests: XCTestCase {
 		)
 	}
 
-	func testCustomTextBuilder() {
+	@Test func customTextBuilder() {
 		expectNoDifference(
 			customTextBuilderText(),
 			Text("Lorem").underline().foregroundColor(.blue) +
@@ -53,7 +54,7 @@ final class TextBuilderTests: XCTestCase {
 		)
 	}
 
-	func testComplexTextBuilder() {
+	@Test func complexTextBuilder() {
 		expectNoDifference(
 			complexTextBuilderText(),
 			Text(verbatim: "Lorem").underline().foregroundColor(.blue) +
