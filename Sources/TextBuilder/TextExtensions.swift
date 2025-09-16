@@ -1,5 +1,5 @@
-import Builders
-import SwiftUI
+public import Builders
+public import SwiftUI
 
 extension Text {
 	@inlinable

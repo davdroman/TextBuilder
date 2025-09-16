@@ -15,6 +15,6 @@ public struct NewlineSeparator: TextBuilderSeparator {
 	public static var separator: String? { "\n" }
 }
 
-public typealias TextBuilder = TextBuilderWith<NoSeparator>
+//public typealias TextBuilder = TextBuilderWith<NoSeparator>
 public typealias TextBuilderWithSpaces = TextBuilderWith<WhitespaceSeparator>
 public typealias TextBuilderWithNewlines = TextBuilderWith<NewlineSeparator>

@@ -1,4 +1,7 @@
-import SwiftUI
+public import SwiftUI
+
+//public macro TextBuilder() = #externalMacro(module: "TextBuilderMacro", type: "TextBuilderMacro")
+public macro TextBuilder(separator: some StringProtocol = "") = #externalMacro(module: "TextBuilderMacro", type: "TextBuilderMacro")
 
 /// A custom attribute that constructs combined text views.
 ///
