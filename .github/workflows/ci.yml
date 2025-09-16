@@ -8,7 +8,7 @@ on:
     branches:
       - "**"
   schedule:
-    - cron: '3 3 * * 2'  # 3:03 AM, every Tuesday
+    - cron: "3 3 * * 2" # 3:03 AM, every Tuesday
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -17,7 +17,7 @@ concurrency:
 jobs:
   macOS:
     name: ${{ matrix.platform }} (Swift ${{ matrix.swift }})
-    runs-on: ${{ matrix.os }}
+    runs-on: macos-15
     strategy:
       fail-fast: false
       matrix:
@@ -27,26 +27,26 @@ jobs:
           - tvOS
           - watchOS
         swift:
-          - 5.7
-          - 5.8
-          - 5.9
-        include:
-          - swift: 5.7
-            os: macos-13
-          - swift: 5.8
-            os: macos-13
-          - swift: 5.9
-            os: macos-13
-          - action: test
-          - platform: tvOS
-            action: build
-          - platform: watchOS
-            action: build
+          - "6.0"
+          - "6.1"
+          - "6.2"
     steps:
-    - uses: actions/checkout@v4
-    - uses: mxcl/xcodebuild@v2
-      with:
-        action: ${{ matrix.action }}
-        platform: ${{ matrix.platform }}
-        swift: ~${{ matrix.swift }}
-        scheme: TextBuilder
+      - name: Git Checkout
+        uses: actions/checkout@v5
+
+      - name: Select Xcode version
+        uses: mxcl/xcodebuild@v3
+        with:
+          swift: ~${{ matrix.swift }}
+          action: none
+
+      - if: matrix.platform != 'macOS'
+        name: Download Required Runtime
+        run: xcodebuild -downloadPlatform ${{ matrix.platform }}
+
+      - uses: mxcl/xcodebuild@v3
+        with:
+          swift: ~${{ matrix.swift }}
+          platform: ${{ matrix.platform }}
+          scheme: TextBuilder
+          action: test
