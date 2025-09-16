@@ -1,4 +1,5 @@
 {
+  "originHash" : "251934ce5c5705f19a56210b5be6599d0af09ebf03410d86b3ecd96529565ab0",
   "pins" : [
     {
       "identity" : "swift-argument-parser",
@@ -23,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/davdroman/swift-builders",
       "state" : {
-        "revision" : "0119400fb6e733219f61c1c95c6dd61ca5965c26",
-        "version" : "0.5.1"
+        "revision" : "72cfbfffd6a56883a3c590a87f88a71c819d6de3",
+        "version" : "0.10.0"
       }
     },
     {
@@ -46,5 +47,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
