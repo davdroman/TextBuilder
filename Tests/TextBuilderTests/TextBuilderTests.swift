@@ -54,7 +54,6 @@ final class TextBuilderTests: XCTestCase {
 	}
 
 	func testComplexTextBuilder() {
-		#if compiler(>=5.7)
 		XCTAssertNoDifference(
 			complexTextBuilderText(),
 			Text(verbatim: "Lorem").underline().foregroundColor(.blue) +
@@ -71,22 +70,6 @@ final class TextBuilderTests: XCTestCase {
 				Text(verbatim: "3")
 			)
 		)
-		#else
-		XCTAssertNoDifference(
-			complexTextBuilderText(),
-			Text(verbatim: "Lorem").underline().foregroundColor(.blue) +
-			Text(verbatim: " ") +
-			Text(verbatim: "sit").bold() +
-			Text(verbatim: " ") +
-			Text(verbatim: "amet, consectetur") +
-			Text(verbatim: " ") +
-			Text(verbatim: "1") +
-			Text(verbatim: " ") +
-			Text(verbatim: "2") +
-			Text(verbatim: " ") +
-			Text(verbatim: "3")
-		)
-		#endif
 	}
 }
 
