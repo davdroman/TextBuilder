@@ -107,6 +107,8 @@ var customText: Text {
 }
 ```
 
+This is useful if you simply want to insert some rich text into a view body without defining a separate function.
+
 ## Limitations
 
 The `@TextBuilder` macro currently cannot be applied to computed properties due to Swift limitations. Use functions instead.
