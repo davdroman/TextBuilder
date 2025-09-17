@@ -10,11 +10,6 @@
 
 TextBuilder leverages the power of Swift [Macros](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/macros/) to solve this problem. The `@TextBuilder` macro transforms functions into builder-style closures, making text composition intuitive and readable.
 
-## Requirements
-
-- Swift 6.0+
-- iOS 13.0+, tvOS 13.0+, macOS 10.15+, watchOS 6.0+
-
 ## Usage
 
 ### Basic Usage
@@ -111,28 +106,6 @@ var customText: Text {
     }
 }
 ```
-
-### Joining Text Arrays
-
-For programmatic text composition, use the `joined` method on sequences of `Text`:
-
-```swift
-let textArray = [
-    Text("First").bold(),
-    Text("Second").italic(),
-    Text("Third").underline()
-]
-
-let joined = textArray.joined(separator: Text(" | "))
-```
-
-## Behavior
-
-- **Empty bodies** produce `Text(verbatim: "")`
-- **Mixed types**: You can mix `Text` values and string-like values (string literals, `String`, `Substring`, etc.)
-- **Control flow**: `if`/`else`, `if let`, and `for` loops are fully supported
-- **Modifiers preserved**: Styling applied to individual segments is maintained
-- **Separator placement**: Separators are inserted between segments, not before the first or after the last
 
 ## Limitations
 
