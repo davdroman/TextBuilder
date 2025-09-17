@@ -1,3 +1,4 @@
+#if canImport(TextBuilderMacro)
 import MacroTesting
 import Testing
 import TextBuilderMacro
@@ -364,3 +365,4 @@ struct TextBuilderMacroTests {
 		}
 	}
 }
+#endif
