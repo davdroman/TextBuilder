@@ -23,8 +23,10 @@ jobs:
       matrix:
         platform:
           - iOS
+          - mac-catalyst
           - macOS
           - tvOS
+          - visionOS
           - watchOS
         swift:
           - "6.0"
