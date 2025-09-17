@@ -53,4 +53,5 @@ jobs:
         with:
           swift: ~${{ matrix.swift }}
           platform: ${{ matrix.platform }}
+          verbosity: xcbeautify
           action: test
