@@ -1,4 +1,4 @@
-// swift-tools-version:6.0
+// swift-tools-version: 6.0
 
 import CompilerPluginSupport
 import PackageDescription
