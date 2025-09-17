@@ -97,7 +97,7 @@ func conditionalText(showDetails: Bool) -> Text {
 If you prefer not to use macros, you can use the underlying `Text` initializer directly:
 
 ```swift
-var customText: Text {
+var body: some View {
     Text(separator: " 👏 ") {
         "Lorem".text.underline().foregroundColor(.blue)
         "ipsum dolor"
