@@ -33,19 +33,12 @@ let package = Package(
 			"TextBuilderMacro",
 			.product(name: "MacroTesting", package: "swift-macro-testing"),
 		]),
-
-		.executableTarget(name: "Benchmarks", dependencies: [
-			.product(name: "Benchmark", package: "swift-benchmark"),
-			.target(name: "TextBuilder"),
-		]),
 	]
 )
 
 package.dependencies = [
-	.package(url: "https://github.com/google/swift-benchmark", from: "0.1.2"),
 	.package(url: "https://github.com/davdroman/swift-builders", from: "0.10.0"),
 	.package(url: "https://github.com/pointfreeco/swift-custom-dump", from: "1.0.0"),
-
 	.package(url: "https://github.com/pointfreeco/swift-macro-testing", from: "0.6.0"),
 	.package(url: "https://github.com/swiftlang/swift-syntax", "600.0.0"..<"603.0.0"),
 ]

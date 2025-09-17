@@ -1,7 +1,7 @@
 #if canImport(TextBuilderMacro)
 import MacroTesting
 import Testing
-import TextBuilderMacro
+@testable import TextBuilderMacro
 
 @Suite(
 	.macros(
