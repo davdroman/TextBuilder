@@ -43,11 +43,11 @@ jobs:
           action: none
           verbosity: xcbeautify
 
-      - if: matrix.platform != 'macOS'
+      - if: matrix.platform != 'macOS' && matrix.platform != 'mac-catalyst'
         name: Download Required Runtime
         run: xcodebuild -downloadPlatform ${{ matrix.platform }}
 
-      - if: matrix.platform != 'macOS'
+      - if: matrix.platform != 'macOS' && matrix.platform != 'mac-catalyst'
         name: List Available Simulators
         run: xcrun simctl list devices
 
