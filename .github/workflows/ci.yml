@@ -44,9 +44,19 @@ jobs:
         name: Download Required Runtime
         run: xcodebuild -downloadPlatform ${{ matrix.platform }}
 
-      - uses: mxcl/xcodebuild@v3
+      - name: Run Library Tests
+        uses: mxcl/xcodebuild@v3
         with:
           swift: ~${{ matrix.swift }}
           platform: ${{ matrix.platform }}
           scheme: TextBuilder
+          action: test
+
+      - if: matrix.platform == 'macOS'
+        name: Run Macro Tests
+        uses: mxcl/xcodebuild@v3
+        with:
+          swift: ~${{ matrix.swift }}
+          platform: ${{ matrix.platform }}
+          scheme: TextBuilderMacroTests
           action: test
