@@ -2,6 +2,23 @@ public import Builders
 public import SwiftUI
 
 extension StringProtocol {
+	/// Turns any `StringProtocol` (like `String` or `Substring`) into a SwiftUI `Text`.
+	///
+	/// In this package, it’s a small convenience for the moments when you actually need a `Text`:
+	/// to chain `Text`-only modifiers or to pass a `Text` to an API, even though inside builders
+	/// you can drop raw strings directly. Using `.text` keeps things tidy and avoids sprinkling
+	/// `Text(...)` everywhere.
+	///
+	/// ## Example
+	/// ```swift
+	/// @TextBuilder(separator: " ")
+	/// func message() -> Text {
+	///     "Hello"
+	///     "world".text.bold()
+	/// }
+	/// ```
+	///
+	/// This is equivalent to `Text(self)` and produces verbatim text.
 	@inlinable
 	public var text: Text {
 		Text(self)
