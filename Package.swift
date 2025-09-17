@@ -30,7 +30,7 @@ let package = Package(
 			.product(name: "SwiftCompilerPlugin", package: "swift-syntax"),
 		]),
 		.testTarget(name: "TextBuilderMacroTests", dependencies: [
-			.target(name: "TextBuilderMacro", condition: .when(platforms: [.macOS])),
+			"TextBuilderMacro",
 			.product(name: "MacroTesting", package: "swift-macro-testing"),
 		]),
 
