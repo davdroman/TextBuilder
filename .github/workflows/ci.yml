@@ -23,8 +23,10 @@ jobs:
       matrix:
         platform:
           - iOS
+          - mac-catalyst
           - macOS
           - tvOS
+          - visionOS
           - watchOS
         swift:
           - "6.0"
@@ -39,14 +41,20 @@ jobs:
         with:
           swift: ~${{ matrix.swift }}
           action: none
+          verbosity: xcbeautify
 
-      - if: matrix.platform != 'macOS'
+      - if: matrix.platform != 'mac-catalyst' && matrix.platform != 'macOS'
         name: Download Required Runtime
         run: xcodebuild -downloadPlatform ${{ matrix.platform }}
 
-      - uses: mxcl/xcodebuild@v3
+      - if: matrix.platform != 'mac-catalyst' && matrix.platform != 'macOS'
+        name: List Available Simulators
+        run: xcrun simctl list devices
+
+      - name: Run Tests
+        uses: mxcl/xcodebuild@v3
         with:
           swift: ~${{ matrix.swift }}
           platform: ${{ matrix.platform }}
-          scheme: TextBuilder
           action: test
+          verbosity: xcbeautify

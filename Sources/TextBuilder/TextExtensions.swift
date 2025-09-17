@@ -1,21 +1,31 @@
-import Builders
-import SwiftUI
-
-extension Text {
-	@inlinable
-	public static var empty: Text {
-		Text(verbatim: "")
-	}
-}
+public import Builders
+public import SwiftUI
 
 extension StringProtocol {
+	/// Turns any `StringProtocol` (like `String` or `Substring`) into a SwiftUI `Text`.
+	///
+	/// In this package, it’s a small convenience for the moments when you actually need a `Text`:
+	/// to chain `Text`-only modifiers or to pass a `Text` to an API, even though inside builders
+	/// you can drop raw strings directly. Using `.text` keeps things tidy and avoids sprinkling
+	/// `Text(...)` everywhere.
+	///
+	/// ## Example
+	/// ```swift
+	/// @TextBuilder(separator: " ")
+	/// func message() -> Text {
+	///     "Hello"
+	///     "world".text.bold()
+	/// }
+	/// ```
+	///
+	/// This is equivalent to `Text(self)` and produces verbatim text.
 	@inlinable
 	public var text: Text {
 		Text(self)
 	}
 }
 
-extension Sequence where Element == Text {
+extension Sequence<Text> {
 	/// Returns a new `Text` by concatenating the elements of the sequence.
 	///
 	/// If the sequence is empty, it returns nil.
@@ -29,13 +39,14 @@ extension Sequence where Element == Text {
 	///
 	/// - Parameter separator: A `Text` view to insert between each of the elements
 	///   in this sequence. By default there is no separator.
-	/// - Returns: A single, concatenated `Text` view.
+	/// - Returns: A single, concatenated `Text` view, or `nil` if the sequence
+	///   is empty.
 	public func joined(separator: Text? = nil) -> Text? {
 		reduce(nil) { accumulated, next in
-			guard let accumulated = accumulated else {
+			guard let accumulated else {
 				return next
 			}
-			guard let separator = separator else {
+			guard let separator else {
 				return accumulated + next
 			}
 			return accumulated + separator + next
@@ -43,11 +54,9 @@ extension Sequence where Element == Text {
 	}
 }
 
-public typealias TextArrayBuilder = ArrayBuilder<Text>
-
-extension TextArrayBuilder {
+extension ArrayBuilder<Text> {
 	@inlinable
-	public static func buildExpression<S: StringProtocol>(_ expression: S) -> [Text] {
+	public static func buildExpression(_ expression: some StringProtocol) -> [Text] {
 		[Text(expression)]
 	}
 }
@@ -62,8 +71,8 @@ extension Text {
 	///   - content: A text array builder that creates text components.
 	public init(
 		separator: Text? = nil,
-		default: Text = .empty,
-		@TextArrayBuilder content: () -> [Text]
+		default: Text = Text(verbatim: ""),
+		@ArrayBuilder<Text> content: () -> [Text]
 	) {
 		self = content().joined(separator: separator) ?? `default`
 	}
@@ -75,10 +84,10 @@ extension Text {
 	///   - separator: The string to use as a separator between received text components.
 	///   - content: A text array builder that creates text components.
 	@inlinable
-	public init<Separator: StringProtocol>(
-		separator: Separator,
-		default: Text = .empty,
-		@TextArrayBuilder content: () -> [Text]
+	public init(
+		separator: some StringProtocol,
+		default: Text = Text(verbatim: ""),
+		@ArrayBuilder<Text> content: () -> [Text]
 	) {
 		self.init(separator: Text(separator), content: content)
 	}

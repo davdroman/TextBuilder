@@ -5,9 +5,29 @@ import TextBuilder
 
 @Suite
 struct TextBuilderTests {
-	@Test func basicTextBuilder() {
+	@Test func empty() {
+		@TextBuilder
+		func sut() -> Text {
+			// empty
+		}
+
 		expectNoDifference(
-			basicTextBuilderText(),
+			sut(),
+			Text(verbatim: "")
+		)
+	}
+
+	@Test func defaultTextBuilder() {
+		@TextBuilder
+		func sut() -> Text {
+			Text("Lorem").underline().foregroundColor(.blue)
+			Text("ipsum dolor")
+			Text("sit").bold()
+			Text("amet, consectetur")
+		}
+
+		expectNoDifference(
+			sut(),
 			Text("Lorem").underline().foregroundColor(.blue) +
 			Text("ipsum dolor") +
 			Text("sit").bold() +
@@ -16,8 +36,16 @@ struct TextBuilderTests {
 	}
 
 	@Test func spacedTextBuilder() {
+		@TextBuilder(separator: " ")
+		func sut() -> Text {
+			Text("Lorem").underline().foregroundColor(.blue)
+			Text("ipsum dolor")
+			Text("sit").bold()
+			Text("amet, consectetur")
+		}
+
 		expectNoDifference(
-			spacedTextBuilderText(),
+			sut(),
 			Text("Lorem").underline().foregroundColor(.blue) +
 			Text(verbatim: " ") +
 			Text("ipsum dolor") +
@@ -29,8 +57,16 @@ struct TextBuilderTests {
 	}
 
 	@Test func multilineTextBuilder() {
+		@TextBuilder(separator: "\n")
+		func sut() -> Text {
+			Text("Lorem").underline().foregroundColor(.blue)
+			Text("ipsum dolor")
+			Text("sit").bold()
+			Text("amet, consectetur")
+		}
+
 		expectNoDifference(
-			multilineTextBuilderText(),
+			sut(),
 			Text("Lorem").underline().foregroundColor(.blue) +
 			Text(verbatim: "\n") +
 			Text("ipsum dolor") +
@@ -42,91 +78,59 @@ struct TextBuilderTests {
 	}
 
 	@Test func customTextBuilder() {
+		@TextBuilder(separator: " 👏 ")
+		func sut() -> Text {
+			Text("Lorem").underline().foregroundColor(.blue)
+			Text("ipsum dolor")
+			Text("sit").bold()
+			Text("amet, consectetur")
+		}
+
 		expectNoDifference(
-			customTextBuilderText(),
+			sut(),
 			Text("Lorem").underline().foregroundColor(.blue) +
-			Text(verbatim: " 🍆 ") +
+			Text(verbatim: " 👏 ") +
 			Text("ipsum dolor") +
-			Text(verbatim: " 🍆 ") +
+			Text(verbatim: " 👏 ") +
 			Text("sit").bold() +
-			Text(verbatim: " 🍆 ") +
+			Text(verbatim: " 👏 ") +
 			Text("amet, consectetur")
 		)
 	}
 
 	@Test func complexTextBuilder() {
+		@TextBuilder(separator: " ")
+		func sut() -> Text {
+			"Lorem".text.underline().foregroundColor(.blue)
+			if false {
+				"ipsum dolor"
+			}
+			if false {
+				"sit"
+			} else {
+				"sit".text.bold()
+			}
+			if let string = "amet, consectetur" as String? {
+				string
+			}
+			for i in 1...3 {
+				String(i)
+			}
+		}
+
 		expectNoDifference(
-			complexTextBuilderText(),
+			sut(),
 			Text(verbatim: "Lorem").underline().foregroundColor(.blue) +
 			Text(verbatim: " ") +
 			Text(verbatim: "sit").bold() +
 			Text(verbatim: " ") +
 			Text(verbatim: "amet, consectetur") +
 			Text(verbatim: " ") +
-			(
-				Text(verbatim: "1") +
-				Text(verbatim: " ") +
-				Text(verbatim: "2") +
-				Text(verbatim: " ") +
-				Text(verbatim: "3")
-			)
+			Text(verbatim: "1") +
+			Text(verbatim: " ") +
+			Text(verbatim: "2") +
+			Text(verbatim: " ") +
+			Text(verbatim: "3")
 		)
-	}
-}
-
-private extension TextBuilderTests {
-	@TextBuilder
-	func basicTextBuilderText() -> Text {
-		Text("Lorem").underline().foregroundColor(.blue)
-		Text("ipsum dolor")
-		Text("sit").bold()
-		Text("amet, consectetur")
-	}
-
-	@TextBuilderWithSpaces
-	func spacedTextBuilderText() -> Text {
-		Text("Lorem").underline().foregroundColor(.blue)
-		Text("ipsum dolor")
-		Text("sit").bold()
-		Text("amet, consectetur")
-	}
-
-	@TextBuilderWithNewlines
-	func multilineTextBuilderText() -> Text {
-		Text("Lorem").underline().foregroundColor(.blue)
-		Text("ipsum dolor")
-		Text("sit").bold()
-		Text("amet, consectetur")
-	}
-
-	struct EmojiSeparator: TextBuilderSeparator {
-		static var separator: String? { " 🍆 " }
-	}
-
-	@TextBuilderWith<EmojiSeparator>
-	func customTextBuilderText() -> Text {
-		Text("Lorem").underline().foregroundColor(.blue)
-		Text("ipsum dolor")
-		Text("sit").bold()
-		Text("amet, consectetur")
-	}
-
-	@TextBuilderWithSpaces
-	func complexTextBuilderText() -> Text {
-		"Lorem".text.underline().foregroundColor(.blue)
-		if false {
-			"ipsum dolor"
-		}
-		if false {
-			"sit"
-		} else {
-			"sit".text.bold()
-		}
-		if let string = "amet, consectetur" as String? {
-			string
-		}
-		for i in 1...3 {
-			String(i)
-		}
 	}
 }

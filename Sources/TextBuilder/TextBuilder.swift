@@ -1,81 +1,45 @@
-import SwiftUI
+public import SwiftUI
 
-/// A custom attribute that constructs combined text views.
+/// A body macro that lets you build a single `SwiftUI.Text` from multiple parts using a builder-style closure. Write
+/// `Text` fragments and string-like values across multiple lines, and they will be concatenated into one `Text`,
+/// optionally inserting a separator between items.
 ///
-/// You can use ``TextBuilder`` as an attribute for text-producing properties
-/// or function parameters, allowing them to provide combined text views. For example,
-/// the following `loremIpsum` property will create a single styled text view with each
-/// text separated using eggplant emoji.
+/// ## Behavior
+/// - Empty bodies produce `Text(verbatim: "")`.
+/// - You can mix `Text` values and string-like values (e.g., string literals, `String`, results of `String(i)`, etc.).
+///   These string values are treated as verbatim text.
+/// - Control flow is supported: `if`/`else`, `if let`, and `for` loops can conditionally emit or repeat parts.
+/// - Modifiers applied to individual segments (e.g., `.bold()`, `.underline()`, `.foregroundColor(_:)`) are preserved
+///   for those segments.
+/// - When a separator is provided, it is inserted between emitted segments, not before the first or after the last one.
 ///
-///     struct EggplantSeparator: TextBuilderSeparator {
-///         static var separator: String? { " 🍆 " }
-///     }
+/// ## Example
+/// ```swift
+/// @TextBuilder(separator: " ")
+/// func message() -> Text {
+///     Text("Hello").bold()
+///     "world, the year is"
+///     String(2025)
+/// }
+/// ```
 ///
-///     @TextBuilder<EggplantSeparator>
-///     var loremIpsum: Text {
-///         Text("Lorem").underline().foregroundColor(.blue)
-///         Text("ipsum dolor")
-///         Text("sit").bold()
-///         Text("amet, consectetur")
-///     }
-///
-@resultBuilder
-public struct TextBuilderWith<Separator: TextBuilderSeparator> {
-	@inlinable
-	public static func buildPartialBlock(first: Text?) -> Text? {
-		first
-	}
+/// ## Notes
+/// - The expansion relies on the ``Text.init(separator:default:content:)-(Text?,_,_)`` builder-style API that is
+///   included as part of this package, which performs concatenation and separator insertion.
+/// - Apply `@TextBuilder` to functions that return `Text`.
+/// - Applying `@TextBuilder` to computed properties that return `Text` is currently unsupported due to limitations in
+///   Swift. See https://github.com/swiftlang/swift/issues/75715 for details.
+@attached(body)
+public macro TextBuilder(separator: Text? = nil) = #externalMacro(
+	module: "TextBuilderMacro",
+	type: "TextBuilderMacro"
+)
 
-	@inlinable
-	public static func buildPartialBlock(accumulated: Text?, next: Text?) -> Text? {
-		guard let next else {
-			return accumulated
-		}
-		guard let accumulated else {
-			return next
-		}
-		guard let separator = Separator.separator else {
-			return accumulated + next
-		}
-		return accumulated + Text(separator) + next
-	}
+/// Convenience overload that accepts any `StringProtocol` as the separator, which is treated as verbatim text
+/// (equivalent to `Text(verbatim: separator)`).
+@attached(body)
+public macro TextBuilder<Separator: StringProtocol>(separator: Separator) = #externalMacro(
+	module: "TextBuilderMacro",
+	type: "TextBuilderMacro"
+)
 
-	public static func buildArray(_ components: [Text?]) -> Text? {
-		components.lazy.compactMap { $0 }.joined(separator: Separator.separator.map { Text($0) })
-	}
-
-	@inlinable
-	public static func buildEither(first component: Text?) -> Text? {
-		component
-	}
-
-	@inlinable
-	public static func buildEither(second component: Text?) -> Text? {
-		component
-	}
-
-	@inlinable
-	public static func buildExpression(_ string: some StringProtocol) -> Text? {
-		Text(string)
-	}
-
-	@inlinable
-	public static func buildExpression(_ component: Text) -> Text? {
-		component
-	}
-
-	@inlinable
-	public static func buildLimitedAvailability(_ component: Text?) -> Text? {
-		component
-	}
-
-	@inlinable
-	public static func buildOptional(_ component: Text??) -> Text? {
-		component ?? nil
-	}
-
-	@inlinable
-	public static func buildFinalResult(_ component: Text?) -> Text {
-		component ?? .empty
-	}
-}
