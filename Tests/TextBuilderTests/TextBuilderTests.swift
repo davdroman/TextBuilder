@@ -5,6 +5,18 @@ import TextBuilder
 
 @Suite
 struct TextBuilderTests {
+	@Test func empty() {
+		@TextBuilder
+		func sut() -> Text {
+			// empty
+		}
+
+		expectNoDifference(
+			sut(),
+			Text(verbatim: "")
+		)
+	}
+
 	@Test func defaultTextBuilder() {
 		@TextBuilder
 		func sut() -> Text {
