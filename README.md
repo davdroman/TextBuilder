@@ -98,7 +98,7 @@ If you prefer not to use macros, you can use the underlying `Text` initializer d
 
 ```swift
 var customText: Text {
-    Text(separator: " 🍆 ") {
+    Text(separator: " 👏 ") {
         "Lorem".text.underline().foregroundColor(.blue)
         "ipsum dolor"
         "sit".text.bold()
