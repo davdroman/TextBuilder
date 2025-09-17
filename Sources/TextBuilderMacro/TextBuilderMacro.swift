@@ -1,9 +1,9 @@
-//import SwiftDiagnostics
-import SwiftSyntax
-import SwiftSyntaxMacros
+import SwiftDiagnostics
+public import SwiftSyntax
+public import SwiftSyntaxMacros
 
-struct TextBuilderMacro: BodyMacro {
-	static func expansion(
+public struct TextBuilderMacro: BodyMacro {
+	public static func expansion(
 		of node: AttributeSyntax,
 		providingBodyFor declaration: some DeclSyntaxProtocol & WithOptionalCodeBlockSyntax,
 		in context: some MacroExpansionContext
