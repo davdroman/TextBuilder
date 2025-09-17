@@ -3,6 +3,7 @@ import SwiftUI
 import Testing
 import TextBuilder
 
+@MainActor
 @Suite
 struct TextBuilderTests {
 	@Test func basicTextBuilder() {
@@ -63,13 +64,11 @@ struct TextBuilderTests {
 			Text(verbatim: " ") +
 			Text(verbatim: "amet, consectetur") +
 			Text(verbatim: " ") +
-			(
-				Text(verbatim: "1") +
-				Text(verbatim: " ") +
-				Text(verbatim: "2") +
-				Text(verbatim: " ") +
-				Text(verbatim: "3")
-			)
+			Text(verbatim: "1") +
+			Text(verbatim: " ") +
+			Text(verbatim: "2") +
+			Text(verbatim: " ") +
+			Text(verbatim: "3")
 		)
 	}
 }
@@ -83,7 +82,7 @@ private extension TextBuilderTests {
 		Text("amet, consectetur")
 	}
 
-	@TextBuilderWithSpaces
+	@TextBuilder(separator: " ")
 	func spacedTextBuilderText() -> Text {
 		Text("Lorem").underline().foregroundColor(.blue)
 		Text("ipsum dolor")
@@ -91,7 +90,7 @@ private extension TextBuilderTests {
 		Text("amet, consectetur")
 	}
 
-	@TextBuilderWithNewlines
+	@TextBuilder(separator: "\n")
 	func multilineTextBuilderText() -> Text {
 		Text("Lorem").underline().foregroundColor(.blue)
 		Text("ipsum dolor")
@@ -99,11 +98,7 @@ private extension TextBuilderTests {
 		Text("amet, consectetur")
 	}
 
-	struct EmojiSeparator: TextBuilderSeparator {
-		static var separator: String? { " 🍆 " }
-	}
-
-	@TextBuilderWith<EmojiSeparator>
+	@TextBuilder(separator: " 🍆 ")
 	func customTextBuilderText() -> Text {
 		Text("Lorem").underline().foregroundColor(.blue)
 		Text("ipsum dolor")
@@ -111,7 +106,7 @@ private extension TextBuilderTests {
 		Text("amet, consectetur")
 	}
 
-	@TextBuilderWithSpaces
+	@TextBuilder(separator: " ")
 	func complexTextBuilderText() -> Text {
 		"Lorem".text.underline().foregroundColor(.blue)
 		if false {

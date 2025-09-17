@@ -1,13 +1,6 @@
 public import Builders
 public import SwiftUI
 
-extension Text {
-	@inlinable
-	public static var empty: Text {
-		Text(verbatim: "")
-	}
-}
-
 extension StringProtocol {
 	@inlinable
 	public var text: Text {
@@ -15,7 +8,7 @@ extension StringProtocol {
 	}
 }
 
-extension Sequence where Element == Text {
+extension Sequence<Text> {
 	/// Returns a new `Text` by concatenating the elements of the sequence.
 	///
 	/// If the sequence is empty, it returns nil.
@@ -32,10 +25,10 @@ extension Sequence where Element == Text {
 	/// - Returns: A single, concatenated `Text` view.
 	public func joined(separator: Text? = nil) -> Text? {
 		reduce(nil) { accumulated, next in
-			guard let accumulated = accumulated else {
+			guard let accumulated else {
 				return next
 			}
-			guard let separator = separator else {
+			guard let separator else {
 				return accumulated + next
 			}
 			return accumulated + separator + next
@@ -43,11 +36,9 @@ extension Sequence where Element == Text {
 	}
 }
 
-public typealias TextArrayBuilder = ArrayBuilder<Text>
-
-extension TextArrayBuilder {
+extension ArrayBuilder<Text> {
 	@inlinable
-	public static func buildExpression<S: StringProtocol>(_ expression: S) -> [Text] {
+	public static func buildExpression(_ expression: some StringProtocol) -> [Text] {
 		[Text(expression)]
 	}
 }
@@ -62,8 +53,8 @@ extension Text {
 	///   - content: A text array builder that creates text components.
 	public init(
 		separator: Text? = nil,
-		default: Text = .empty,
-		@TextArrayBuilder content: () -> [Text]
+		default: Text = Text(verbatim: ""),
+		@ArrayBuilder<Text> content: () -> [Text]
 	) {
 		self = content().joined(separator: separator) ?? `default`
 	}
@@ -75,10 +66,10 @@ extension Text {
 	///   - separator: The string to use as a separator between received text components.
 	///   - content: A text array builder that creates text components.
 	@inlinable
-	public init<Separator: StringProtocol>(
-		separator: Separator,
-		default: Text = .empty,
-		@TextArrayBuilder content: () -> [Text]
+	public init(
+		separator: some StringProtocol,
+		default: Text = Text(verbatim: ""),
+		@ArrayBuilder<Text> content: () -> [Text]
 	) {
 		self.init(separator: Text(separator), content: content)
 	}

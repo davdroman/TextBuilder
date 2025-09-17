@@ -1,3 +1,4 @@
+import Builders
 import CustomDump
 import SwiftUI
 import Testing
@@ -137,7 +138,7 @@ private extension TextExtensionsTests {
 		]
 	}
 
-	@TextArrayBuilder
+	@ArrayBuilder<Text>
 	func textArrayBuilderText() -> [Text] {
 		Text("Lorem").underline().foregroundColor(.blue)
 		Text("ipsum dolor")
