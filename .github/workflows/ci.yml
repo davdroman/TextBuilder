@@ -39,6 +39,7 @@ jobs:
         with:
           swift: ~${{ matrix.swift }}
           action: none
+          verbosity: xcbeautify
 
       - if: matrix.platform != 'macOS'
         name: Download Required Runtime
