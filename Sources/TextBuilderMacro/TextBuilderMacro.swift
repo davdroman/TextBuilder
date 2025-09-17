@@ -8,34 +8,17 @@ public struct TextBuilderMacro: BodyMacro {
 		providingBodyFor declaration: some DeclSyntaxProtocol & WithOptionalCodeBlockSyntax,
 		in context: some MacroExpansionContext
 	) throws -> [CodeBlockItemSyntax] {
-		print(declaration)
-		guard let originalBody = declaration.body else {
-			return []
+		let separatorExpr: ExprSyntax = if let args = node.arguments, case let .argumentList(list) = args, let first = list.first {
+			first.expression
+		} else {
+			ExprSyntax(NilLiteralExprSyntax())
 		}
 
-		// Extract separator expression if provided; default to nil
-		let separatorExpr: ExprSyntax = {
-			if let args = node.arguments, case let .argumentList(list) = args, let first = list.first {
-				return first.expression
-			} else {
-				// nil literal
-				return ExprSyntax(NilLiteralExprSyntax())
-			}
-		}()
-
-		// Use the original statements, but strip any leading trivia from the first item
-		// to avoid an extra blank line after the opening brace of the trailing closure.
-		let originalItems = originalBody.statements
-//		let adjustedItems: CodeBlockItemListSyntax = {
-//			guard let first = originalItems.first else { return originalItems }
-//			var itemsArray = Array(originalItems)
-//			itemsArray[itemsArray.startIndex] = first.with(\.leadingTrivia, Trivia())
-//			return CodeBlockItemListSyntax(itemsArray)
-//		}()
+		let statements = declaration.body?.statements ?? []
 
 		return [
 			"""
-			Text(separator: \(separatorExpr)) { \(originalItems) }
+			Text(separator: \(separatorExpr)) { \(statements) }
 			"""
 		]
 	}

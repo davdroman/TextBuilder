@@ -10,7 +10,34 @@ import TextBuilderMacro
 	)
 )
 struct TextBuilderMacroTests {
-	@Test func computedVarWithoutSeparator() throws {
+//	@Test(
+//		.disabled(
+//			"""
+//			Body Macros aren't compatible with computed properties yet.
+//
+//			See: https://github.com/swiftlang/swift/issues/75715
+//			"""
+//		)
+//	)
+	func computedVarWithoutImplementation() throws {
+		assertMacro {
+			"""
+			@TextBuilder
+			var text: Text
+			"""
+		}
+	}
+
+	@Test(
+		.disabled(
+			"""
+			Body Macros aren't compatible with computed properties yet.
+
+			See: https://github.com/swiftlang/swift/issues/75715
+			"""
+		)
+	)
+	func computedVarWithoutSeparator() throws {
 		assertMacro {
 			"""
 			@TextBuilder
@@ -35,7 +62,7 @@ struct TextBuilderMacroTests {
 		} expansion: {
 			"""
 			var text: Text {
-				Text(separator: "") {
+				Text(separator: nil) {
 					"Lorem".text.underline().foregroundColor(.blue)
 					if false {
 						"ipsum dolor"
@@ -48,7 +75,7 @@ struct TextBuilderMacroTests {
 					if let string = "amet, consectetur" as String? {
 						string
 					}
-					for i in 1...3 {
+					for i in 1 ... 3 {
 						String(i)
 					}
 				}
@@ -57,7 +84,16 @@ struct TextBuilderMacroTests {
 		}
 	}
 
-	@Test func computedVarWithLiteralSeparator() throws {
+	@Test(
+		.disabled(
+			"""
+			Body Macros aren't compatible with computed properties yet.
+
+			See: https://github.com/swiftlang/swift/issues/75715
+			"""
+		)
+	)
+	func computedVarWithLiteralSeparator() throws {
 		assertMacro {
 			"""
 			@TextBuilder(separator: " ")
@@ -95,7 +131,7 @@ struct TextBuilderMacroTests {
 					if let string = "amet, consectetur" as String? {
 						string
 					}
-					for i in 1...3 {
+					for i in 1 ... 3 {
 						String(i)
 					}
 				}
@@ -104,7 +140,16 @@ struct TextBuilderMacroTests {
 		}
 	}
 
-	@Test func computedVarWithNonLiteralSeparator() throws {
+	@Test(
+		.disabled(
+			"""
+			Body Macros aren't compatible with computed properties yet.
+
+			See: https://github.com/swiftlang/swift/issues/75715
+			"""
+		)
+	)
+	func computedVarWithNonLiteralSeparator() throws {
 		assertMacro {
 			"""
 			let separator = " "
@@ -144,11 +189,20 @@ struct TextBuilderMacroTests {
 					if let string = "amet, consectetur" as String? {
 						string
 					}
-					for i in 1...3 {
+					for i in 1 ... 3 {
 						String(i)
 					}
 				}
 			}
+			"""
+		}
+	}
+
+	@Test func functionWithoutImplementation() throws {
+		assertMacro {
+			"""
+			@TextBuilder
+			func text() -> Text
 			"""
 		}
 	}
@@ -178,7 +232,7 @@ struct TextBuilderMacroTests {
 		} expansion: {
 			"""
 			func text() -> Text {
-				Text(separator: "") {
+				Text(separator: nil) {
 					"Lorem".text.underline().foregroundColor(.blue)
 					if false {
 						"ipsum dolor"
@@ -191,7 +245,7 @@ struct TextBuilderMacroTests {
 					if let string = "amet, consectetur" as String? {
 						string
 					}
-					for i in 1...3 {
+					for i in 1 ... 3 {
 						String(i)
 					}
 				}
@@ -238,7 +292,7 @@ struct TextBuilderMacroTests {
 					if let string = "amet, consectetur" as String? {
 						string
 					}
-					for i in 1...3 {
+					for i in 1 ... 3 {
 						String(i)
 					}
 				}
@@ -287,7 +341,7 @@ struct TextBuilderMacroTests {
 					if let string = "amet, consectetur" as String? {
 						string
 					}
-					for i in 1...3 {
+					for i in 1 ... 3 {
 						String(i)
 					}
 				}
