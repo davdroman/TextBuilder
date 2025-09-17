@@ -1,11 +1,14 @@
 version: 1
 builder:
   configs:
-  - platform: ios
-    scheme: TextBuilder
-  - platform: macos-xcodebuild
-    scheme: TextBuilder
-  - platform: tvos
-    scheme: TextBuilder
-  - platform: watchos
-    scheme: TextBuilder
+    - platform: ios
+      scheme: TextBuilder
+    - platform: macos-spm
+      scheme: TextBuilder
+    - platform: tvos
+      scheme: TextBuilder
+    - platform: visionos
+      scheme: TextBuilder
+    - platform: watchos
+      scheme: TextBuilder
+    - documentation_targets: [TextBuilder]
