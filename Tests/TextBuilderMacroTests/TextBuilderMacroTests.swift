@@ -5,7 +5,7 @@ import TextBuilderMacro
 
 @Suite(
 	.macros(
-		["TextBuilder": TextBuilderMacro.self],
+		[TextBuilderMacro.self],
 		indentationWidth: .tab,
 		record: .missing
 	)
