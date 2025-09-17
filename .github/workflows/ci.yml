@@ -44,6 +44,10 @@ jobs:
         name: Download Required Runtime
         run: xcodebuild -downloadPlatform ${{ matrix.platform }}
 
+      - if: matrix.platform != 'macOS'
+        name: List Available Simulators
+        run: xcrun simctl list devices
+
       - name: Run Tests
         uses: mxcl/xcodebuild@v3
         with:
