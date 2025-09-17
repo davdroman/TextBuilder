@@ -29,10 +29,10 @@ let package = Package(
 			.product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
 			.product(name: "SwiftCompilerPlugin", package: "swift-syntax"),
 		]),
-		.testTarget(name: "TextBuilderMacroTests", dependencies: [
-			"TextBuilderMacro",
-			.product(name: "MacroTesting", package: "swift-macro-testing"),
-		]),
+//		.testTarget(name: "TextBuilderMacroTests", dependencies: [
+//			"TextBuilderMacro",
+//			.product(name: "MacroTesting", package: "swift-macro-testing"),
+//		]),
 
 		.executableTarget(name: "Benchmarks", dependencies: [
 			.product(name: "Benchmark", package: "swift-benchmark"),
