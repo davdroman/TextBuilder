@@ -3,7 +3,7 @@ import SwiftUI
 import TextBuilder
 
 benchmark("Result Builder") {
-	@TextBuilderWithSpaces
+	@TextBuilder(separator: " ")
 	func complexTextBuilderText() -> Text {
 		"Lorem".text.underline().foregroundColor(.blue)
 		if false {

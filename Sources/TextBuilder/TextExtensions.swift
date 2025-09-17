@@ -22,7 +22,8 @@ extension Sequence<Text> {
 	///
 	/// - Parameter separator: A `Text` view to insert between each of the elements
 	///   in this sequence. By default there is no separator.
-	/// - Returns: A single, concatenated `Text` view.
+	/// - Returns: A single, concatenated `Text` view, or `nil` if the sequence
+	///   is empty.
 	public func joined(separator: Text? = nil) -> Text? {
 		reduce(nil) { accumulated, next in
 			guard let accumulated else {
