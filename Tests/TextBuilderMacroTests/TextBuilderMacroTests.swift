@@ -10,20 +10,27 @@ import TextBuilderMacro
 	)
 )
 struct TextBuilderMacroTests {
-//	@Test(
-//		.disabled(
-//			"""
-//			Body Macros aren't compatible with computed properties yet.
-//
-//			See: https://github.com/swiftlang/swift/issues/75715
-//			"""
-//		)
-//	)
+	@Test(
+		.disabled(
+			"""
+			Body Macros aren't compatible with computed properties yet.
+
+			See: https://github.com/swiftlang/swift/issues/75715
+			"""
+		)
+	)
 	func computedVarWithoutImplementation() throws {
 		assertMacro {
 			"""
 			@TextBuilder
 			var text: Text
+			"""
+		} expansion: {
+			"""
+			var text: Text {
+				Text(separator: nil) {
+				}
+			}
 			"""
 		}
 	}
@@ -203,6 +210,13 @@ struct TextBuilderMacroTests {
 			"""
 			@TextBuilder
 			func text() -> Text
+			"""
+		} expansion: {
+			"""
+			func text() -> Text {
+				Text(separator: nil) {
+				}
+			}
 			"""
 		}
 	}
