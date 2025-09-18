@@ -4,7 +4,7 @@ import CompilerPluginSupport
 import PackageDescription
 
 let package = Package(
-	name: "TextBuilder",
+	name: "swiftui-text-builder",
 	platforms: [
 		.iOS(.v13),
 		.macCatalyst(.v13),
