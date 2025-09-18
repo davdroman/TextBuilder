@@ -58,4 +58,5 @@ jobs:
           swift: ~${{ matrix.swift }}
           platform: ${{ matrix.platform }}
           action: test
+          scheme: swiftui-text-builder
           verbosity: xcbeautify

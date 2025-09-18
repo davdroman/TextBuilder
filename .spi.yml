@@ -2,13 +2,13 @@ version: 1
 builder:
   configs:
     - platform: ios
-      scheme: TextBuilder
+      scheme: swiftui-text-builder
     - platform: macos-spm
-      scheme: TextBuilder
+      scheme: swiftui-text-builder
     - platform: tvos
-      scheme: TextBuilder
+      scheme: swiftui-text-builder
     - platform: visionos
-      scheme: TextBuilder
+      scheme: swiftui-text-builder
     - platform: watchos
-      scheme: TextBuilder
-    - documentation_targets: [TextBuilder]
+      scheme: swiftui-text-builder
+    - documentation_targets: [swiftui-text-builder]
