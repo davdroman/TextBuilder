@@ -7,8 +7,10 @@ let package = Package(
 	name: "TextBuilder",
 	platforms: [
 		.iOS(.v13),
-		.tvOS(.v13),
+		.macCatalyst(.v13),
 		.macOS(.v10_15),
+		.tvOS(.v13),
+		.visionOS(.v1),
 		.watchOS(.v6),
 	],
 	products: [

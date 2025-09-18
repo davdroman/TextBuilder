@@ -8,17 +8,31 @@
 
 `Text` composition in SwiftUI can often be cumbersome, especially when there's logic affecting its format and content.
 
-TextBuilder leverages the power of Swift [Result Builders](https://github.com/apple/swift-evolution/blob/main/proposals/0289-result-builders.md) to solve this problem. TextBuilder mimics SwiftUI's [ViewBuilder](https://developer.apple.com/documentation/swiftui/viewbuilder) to make for a familiar experience at the point of use.
+TextBuilder leverages the power of Swift [Macros](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/macros/) to solve this problem. The `@TextBuilder` macro transforms functions into builder-style closures, making text composition intuitive and readable.
+
+## Installation
+
+Add `TextBuilder` to your Swift Package Manager dependencies:
+
+```swift
+.package(url: "https://github.com/davdroman/swiftui-text-builder", from: "4.0.0"),
+```
+
+Then, add the dependency to your desired target:
+
+```swift
+.product(name: "TextBuilder", package: "swiftui-text-builder"),
+```
 
 ## Usage
 
-TextBuilder offers 3 ready-made builders out of the box, depending on which text separator you need.
+### Basic Usage
 
-### Default (unspaced)
+Apply `@TextBuilder` to functions that return `Text`. The macro will transform the function body into a builder-style closure that concatenates text segments.
 
 ```swift
 @TextBuilder
-var loremIpsum: Text {
+func loremIpsum() -> Text {
     Text("Lorem").underline().foregroundColor(.blue)
     Text("ipsum dolor")
     Text("sit").bold()
@@ -26,13 +40,15 @@ var loremIpsum: Text {
 }
 ```
 
-![](https://github.com/davdroman/TextBuilder/blob/bd991543b123eebf60417b8567f68064655a9151/Tests/TextBuilderTests/__Snapshots__/TextBuilderTests/testBasicTextBuilder.iOS.png?raw=true)
+This creates a concatenated `Text` without any separators between segments.
 
-### With Spaces
+### With Separators
+
+You can specify a separator to be inserted between text segments:
 
 ```swift
-@TextBuilderWithSpaces
-var loremIpsum: Text {
+@TextBuilder(separator: " ")
+func spacedText() -> Text {
     Text("Lorem").underline().foregroundColor(.blue)
     Text("ipsum dolor")
     Text("sit").bold()
@@ -40,13 +56,11 @@ var loremIpsum: Text {
 }
 ```
 
-![](https://github.com/davdroman/TextBuilder/blob/bd991543b123eebf60417b8567f68064655a9151/Tests/TextBuilderTests/__Snapshots__/TextBuilderTests/testSpacedTextBuilder.iOS.png?raw=true)
-
-### Multiline
+For multiline text:
 
 ```swift
-@TextBuilderWithNewlines
-var loremIpsum: Text {
+@TextBuilder(separator: "\n")
+func multilineText() -> Text {
     Text("Lorem").underline().foregroundColor(.blue)
     Text("ipsum dolor")
     Text("sit").bold()
@@ -54,31 +68,51 @@ var loremIpsum: Text {
 }
 ```
 
-![](https://github.com/davdroman/TextBuilder/blob/bd991543b123eebf60417b8567f68064655a9151/Tests/TextBuilderTests/__Snapshots__/TextBuilderTests/testMultilineTextBuilder.iOS.png?raw=true)
+### String Support ✨
 
-### Pro Tip ✨
-
-TextBuilder accepts `String` types directly as if they were plain `Text`, and also provides a `String.text` computed var to remove unwanted code noise when `Text` is explicitly needed.
+TextBuilder accepts `String` types directly and provides a convenient `.text` computed property:
 
 ```swift
-@TextBuilderWithNewlines
-var loremIpsum: Text {
-    "Lorem".text.underline().foregroundColor(.blue)
-    "ipsum dolor"
-    "sit".text.bold()
-    "amet, consectetur"
+@TextBuilder(separator: " ")
+func mixedText() -> Text {
+    "Hello"  // String literal becomes verbatim Text
+    "world".text.bold()  // Use .text for chaining modifiers
+    String(2025)  // Any StringProtocol works
 }
 ```
 
-### Other Separators
+### Control Flow
 
-There are two options to customize the separator used to compose your `Text`.
-
-First, you can use `Text.init(separator:content:)`:
+TextBuilder supports Swift's control flow statements:
 
 ```swift
-var loremIpsum: Text {
-    Text(separator: " 🍆 ") {
+@TextBuilder(separator: " ")
+func conditionalText(showDetails: Bool) -> Text {
+    "Hello"
+
+    if showDetails {
+        "with details"
+    } else {
+        "basic"
+    }
+
+    if let name = userName {
+        name.text.italic()
+    }
+
+    for i in 1...3 {
+        String(i)
+    }
+}
+```
+
+### Alternative API
+
+If you prefer not to use macros, you can use the underlying `Text` initializer directly:
+
+```swift
+var body: some View {
+    Text(separator: " 👏 ") {
         "Lorem".text.underline().foregroundColor(.blue)
         "ipsum dolor"
         "sit".text.bold()
@@ -87,35 +121,10 @@ var loremIpsum: Text {
 }
 ```
 
-But if you prefer to keep using a result builder, you can:
+This is useful if you simply want to insert some rich text into a view body without defining a separate function.
 
-```swift
-struct EggplantSeparator: TextBuilderSeparator {
-    static var separator: String? { " 🍆 " }
-}
+## Limitations
 
-@TextBuilderWith<EggplantSeparator>
-var loremIpsum: Text {
-    "Lorem".text.underline().foregroundColor(.blue)
-    "ipsum dolor"
-    "sit".text.bold()
-    "amet, consectetur"
-}
-```
+The `@TextBuilder` macro currently cannot be applied to computed properties due to Swift limitations. Use functions instead.
 
-![](https://github.com/davdroman/TextBuilder/blob/bd991543b123eebf60417b8567f68064655a9151/Tests/TextBuilderTests/__Snapshots__/TextBuilderTests/testCustomTextBuilder.iOS.png?raw=true)
-
-## Benchmarks
-
-```
-MacBook Pro (14-inch, 2021)
-Apple M1 Pro (10 cores, 8 performance and 2 efficiency)
-32 GB Memory
-
-$ swift run -c release Benchmarks
-
-name           time        std        iterations
-------------------------------------------------
-Result Builder 1875.000 ns ±  26.15 %     729940
-Initializer    2542.000 ns ±  16.88 %     540826
-```
+See [Swift Issue #75715](https://github.com/swiftlang/swift/issues/75715) for updates on computed property support.
