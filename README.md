@@ -10,6 +10,20 @@
 
 TextBuilder leverages the power of Swift [Macros](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/macros/) to solve this problem. The `@TextBuilder` macro transforms functions into builder-style closures, making text composition intuitive and readable.
 
+## Installation
+
+Add `TextBuilder` to your Swift Package Manager dependencies:
+
+```swift
+.package(url: "https://github.com/davdroman/swiftui-text-builder", from: "4.0.0"),
+```
+
+Then, add the dependency to your desired target:
+
+```swift
+.product(name: "TextBuilder", package: "swiftui-text-builder"),
+```
+
 ## Usage
 
 ### Basic Usage
@@ -75,17 +89,17 @@ TextBuilder supports Swift's control flow statements:
 @TextBuilder(separator: " ")
 func conditionalText(showDetails: Bool) -> Text {
     "Hello"
-    
+
     if showDetails {
         "with details"
     } else {
         "basic"
     }
-    
+
     if let name = userName {
         name.text.italic()
     }
-    
+
     for i in 1...3 {
         String(i)
     }
