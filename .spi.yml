@@ -11,4 +11,4 @@ builder:
       scheme: swiftui-text-builder
     - platform: watchos
       scheme: swiftui-text-builder
-    - documentation_targets: [swiftui-text-builder]
+    - documentation_targets: [TextBuilder]
