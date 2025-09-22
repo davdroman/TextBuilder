@@ -1,8 +1,12 @@
 .DS_Store
-/.build
-/.swiftpm
+.build
+.swiftpm/configuration/registries.json
+.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
 /Packages
+/*.swiftinterface
 /*.xcodeproj
 xcuserdata/
 DerivedData/
+.docc-build/
 *.xcresult
+.netrc
