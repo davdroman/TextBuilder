@@ -1,7 +1,6 @@
 .DS_Store
-.build
-.swiftpm/configuration/registries.json
-.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
+.build/
+.swiftpm/
 /Packages
 /*.swiftinterface
 /*.xcodeproj
