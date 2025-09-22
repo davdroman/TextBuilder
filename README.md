@@ -18,7 +18,7 @@ Add `TextBuilder` to your Swift Package Manager dependencies:
 .package(url: "https://github.com/davdroman/swiftui-text-builder", from: "4.0.0"),
 ```
 
-Then, add the dependency to your desired target:
+
 
 ```swift
 .product(name: "TextBuilder", package: "swiftui-text-builder"),
